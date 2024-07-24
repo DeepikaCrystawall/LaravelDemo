@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
+<<<<<<< HEAD
     public function index()
+=======
+    public function ticketListing()
+>>>>>>> 5651992734c25dcf60a80f2b4da1032346d5d6b5
     {
         $tickets = Ticket::with('user') // Assuming 'user' is the relationship method in Ticket model
         ->orderBy('created_at', 'desc')
@@ -15,9 +19,12 @@ class TicketController extends Controller
 
         return view('admin.tickets.list',compact('tickets'));
     }
+<<<<<<< HEAD
 
     public function show(Request $request)
     {
 
     }
+=======
+>>>>>>> 5651992734c25dcf60a80f2b4da1032346d5d6b5
 }
