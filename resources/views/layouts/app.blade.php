@@ -12,6 +12,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+    
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -30,7 +32,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <li><a href="{{ route('users.index')}}">User</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -76,5 +78,19 @@
             @yield('content')
         </main>
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script>
+    $(document).ready(function() {
+    
+    $('.delete').click(function(event) {
+        if (confirm("Delete Record?") == true) {
+            return true;
+        }
+        else{
+            return false;
+        }
+        });
+    });
+</script>
 </body>
 </html>
