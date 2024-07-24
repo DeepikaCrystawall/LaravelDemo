@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
 
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,7 +20,9 @@ Route::post('/ticket/{id}/toggle-status', [TicketController::class, 'toggleStatu
 
  Route::get('/ticketlisting', [TicketController::class, 'ticketlisting'])->name('ticketlist');
 
-
+ Route::resource('/users', '\App\Http\Controllers\UserController');
+ Route::get('/users/delete/{id}', '\App\Http\Controllers\UserController@delete')->name('delete');
+ 
 // Route to display the list of tickets
 // Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
 
