@@ -17,6 +17,7 @@ Route::post('/ticket/{id}/toggle-status', [TicketController::class, 'toggleStatu
  Route::get('/reply/{ticketid}',[TicketController::class,'replyticket'])->name('reply');
  Route::post('/replyupdate',[TicketController::class,'replyupdate'])->name('replyupdate');
 
+ Route::get('/ticketlisting', [TicketController::class, 'ticketlisting'])->name('ticketlist');
 
 
 // Route to display the list of tickets

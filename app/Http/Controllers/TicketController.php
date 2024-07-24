@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Replies;
+
 use App\Models\Ticket;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -15,13 +17,22 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function ticketlisting()
     {
        
         $user    = auth()->user();
        
         $tickets = $user->isAdmin ? Ticket::latest()->get() : $user->tickets;
         return view('ticket.index', compact('tickets'));
+    }
+
+    public function index()
+    {
+        $tickets = Ticket::with('user') // Assuming 'user' is the relationship method in Ticket model
+        ->orderBy('created_at', 'desc')
+        ->paginate(10); // Adjust pagination as per your preference
+
+        return view('admin.tickets.list',compact('tickets'));
     }
 
     /**
@@ -48,7 +59,7 @@ class TicketController extends Controller
             $this->storeAttachment($request, $ticket);
         }
 
-        return redirect(route('ticket.index'));
+        return redirect(route('ticketlist'));
     }
 
     /**
@@ -83,7 +94,7 @@ class TicketController extends Controller
             Storage::disk('public')->delete($ticket->attachment);
             $this->storeAttachment($request, $ticket);
         }
-        return redirect(route('ticket.index'));
+        return redirect(route('ticketlist'));
     }
 
     /**
@@ -127,7 +138,8 @@ class TicketController extends Controller
         $ticketid = $request->ticketid;
         $ticketdetails = Ticket::where('id',$ticketid)->first();        // dd($ticketdetails);
 
-        return view('admin.tickets.reply',compact('ticketdetails'));
+        $replies = Replies::where('ticket_id',$ticketid)->get();
+        return view('admin.tickets.reply',compact('ticketdetails','replies'));
     }
     public function replyupdate(Request $request, Ticket $ticket)
     {

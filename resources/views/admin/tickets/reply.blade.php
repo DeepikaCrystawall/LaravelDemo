@@ -10,7 +10,7 @@
                 @csrf
             <input type="hidden" name="ticketid" value="{{$ticketdetails->id}}">
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Reply for {{$ticketdetails->title}}</label>
+                    <label for="exampleFormControlInput1" class="form-label">Reply for <b>{{$ticketdetails->title}}</b></label>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Reply</label>
@@ -20,6 +20,20 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
+
+            <div class="row">
+                <h2>Earlier Replies</h2>
+                <div class="container">
+                <ul>
+                @foreach($replies as $reply)
+                <li>{{$reply->body}}</li>
+                @endforeach
+
+                </ul>
+               
+                </div>
+               
+            </div>
         </div>
     </div>
 </div>
