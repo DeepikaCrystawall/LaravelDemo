@@ -33,9 +33,9 @@
             @endif    
         </div>
     </div>
-    <div class="card">
+    <div class="card mt-2">
         <div class="card-body">
-<div class="row  mt-4">
+<div class="row  mb-4">
             @if(!$replies->isEmpty())
                 <h2>Replies</h2>
                 <div class="container">
