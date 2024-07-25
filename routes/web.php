@@ -5,12 +5,19 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\GithubController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
+Route::controller(GithubController::class)->group(function(){
+    Route::get('auth/github', 'redirectToGithub')->name('auth.github');
+    Route::get('auth/github/callback', 'handleGithubCallback');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -35,3 +42,26 @@ Route::middleware(['auth'])->group(function () {
     // Ensure /ticket and /ticket/create are accessible to both roles
     Route::resource('/ticket', TicketController::class);
 });
+
+// Route::get('/auth/redirect', function () {
+//     return Socialite::driver('github')
+//     ->scopes(['read:user', 'public_repo'])
+//     ->redirect();
+// });
+ 
+// Route::get('/auth/callback', function () {
+//     $githubUser = Socialite::driver('github')->user();
+ 
+//     $user = User::updateOrCreate([
+//         'github_id' => $githubUser->id,
+//     ], [
+//         'name' => $githubUser->name,
+//         'email' => $githubUser->email,
+//         'github_token' => $githubUser->token,
+//         'github_refresh_token' => $githubUser->refreshToken,
+//     ]);
+ 
+//     Auth::login($user);
+//  dd($user);
+//     return redirect('/home');
+// });
