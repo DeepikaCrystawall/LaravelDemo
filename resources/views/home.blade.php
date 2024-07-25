@@ -6,10 +6,10 @@
         <div class="col-md-8">
             <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                        <span>{{ __('Dashboard') }}</span>
+<!--                       
                         <a href="{{ route('ticket.create') }}" class="btn btn-primary">New Ticket</a>
 
-                        <a href="{{route('ticket.index')}}" class="btn btn-primary">All Tickets</a>
+                        <a href="{{route('ticket.index')}}" class="btn btn-primary">All Tickets</a> -->
 
                     </div>
 

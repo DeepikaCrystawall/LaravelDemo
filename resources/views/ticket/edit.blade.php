@@ -4,9 +4,9 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span>{{ __('Update Support Ticket') }}</span>
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
+                    <h5 class="mb-0">{{ __('Update Support Ticket') }}</h5>
                 </div>
 
                 <div class="card-body">
@@ -28,7 +28,7 @@
                         <!-- Description -->
                         <div class="mb-3">
                             <label for="description" class="form-label">{{ __('Description') }}</label>
-                            <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" rows="3" placeholder="Add description">{{ old('description', $ticket->description) }}</textarea>
+                            <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" rows="4" placeholder="Add description">{{ old('description', $ticket->description) }}</textarea>
                             @error('description')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -39,7 +39,9 @@
                         <!-- Attachment -->
                         <div class="mb-3">
                             @if ($ticket->attachment)
-                                <a href="{{ asset('storage/' . $ticket->attachment) }}" class="text-primary" target="_blank">See Attachment</a>
+                                <div class="mb-2">
+                                    <a href="{{ asset('storage/' . $ticket->attachment) }}" class="text-primary" target="_blank">{{ __('See Attachment') }}</a>
+                                </div>
                             @endif
                             <label for="attachment" class="form-label">{{ __('Attachment (if any)') }}</label>
                             <input id="attachment" class="form-control @error('attachment') is-invalid @enderror" type="file" name="attachment">
