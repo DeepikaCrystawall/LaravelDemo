@@ -16,7 +16,7 @@ class Admin
     public function handle(Request $request, Closure $next): Response
     {
         if (\Auth::user()->role_id != 1) {
-            return response()->json('Opps! You do not have permission to access.');
+            return response()->json('Opps! You do not have permission to access.', 403);
         }
         return $next($request);
     }
