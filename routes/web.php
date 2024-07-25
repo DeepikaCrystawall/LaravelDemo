@@ -6,6 +6,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GithubController;
+use App\Http\Controllers\GoogleLoginController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -17,6 +18,11 @@ Auth::routes();
 Route::controller(GithubController::class)->group(function(){
     Route::get('auth/github', 'redirectToGithub')->name('auth.github');
     Route::get('auth/github/callback', 'handleGithubCallback');
+});
+// GoogleLoginController redirect and callback urls
+Route::controller(GoogleLoginController::class)->group(function(){
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('auth/google/callback', 'handleGoogleCallback');
 });
 
 Route::middleware(['auth'])->group(function () {

@@ -23,7 +23,8 @@ class User extends Authenticatable
         'password',
         'pwd',
         'phone',
-        'github_id'
+        'github_id',
+        'google_id'
     ];
     protected $guarded = ['_token'];
 
