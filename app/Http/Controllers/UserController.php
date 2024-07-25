@@ -43,7 +43,7 @@ class UserController extends Controller
         $inputs['pwd'] = Str::random(6);
         $inputs['password']= Hash::make($inputs['pwd']);
         User::create($inputs);
-        return redirect()->route('users.index')->with('success','User created successfully.');
+        return redirect()->route('users.list')->with('success','User created successfully.');
 
         
     }

@@ -57,9 +57,9 @@ class TicketController extends Controller
 
         if ($request->file('attachment')) {
             $this->storeAttachment($request, $ticket);
-        }
-
-        return redirect(route('ticketlist'));
+        }        
+        return redirect()->route('ticket.index')->with('success','Ticket created successfully.');
+       
     }
 
     /**
@@ -93,8 +93,9 @@ class TicketController extends Controller
         if ($request->file('attachment')) {
             Storage::disk('public')->delete($ticket->attachment);
             $this->storeAttachment($request, $ticket);
-        }
-        return redirect(route('ticketlist'));
+        }        
+        return redirect()->route('ticket.index')->with('success','Ticket updated successfully.');
+       
     }
 
     /**
