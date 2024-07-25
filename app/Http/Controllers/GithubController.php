@@ -37,7 +37,7 @@ class GithubController extends Controller
          
                 Auth::login($findUser);
         
-                return redirect()->intended('home');
+                return redirect()->intended('ticket');
          
             }else{
                 $newUser = User::updateOrCreate(['email' => $user->email],[
@@ -48,7 +48,7 @@ class GithubController extends Controller
         
                 Auth::login($newUser);
         
-                return redirect()->intended('home');
+                return redirect()->intended('ticket');
             }
         
         } catch (Exception $e) {

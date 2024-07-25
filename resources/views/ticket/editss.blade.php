@@ -1,22 +1,23 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('content')
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card shadow-sm border-light">
-                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">{{ __('Create New Support Ticket') }}</h5>
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
+                    <h5 class="mb-0">{{ __('Update Support Ticket') }}</h5>
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('ticket.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('ticket.update', $ticket->id) }}" enctype="multipart/form-data">
                         @csrf
+                        @method('patch')
 
                         <!-- Title -->
                         <div class="mb-3">
                             <label for="title" class="form-label">{{ __('Title') }}</label>
-                            <input id="title" class="form-control @error('title') is-invalid @enderror" type="text" name="title" value="{{ old('title') }}" placeholder="Enter title" autofocus>
+                            <input id="title" class="form-control @error('title') is-invalid @enderror" type="text" name="title" value="{{ old('title', $ticket->title) }}" autofocus placeholder="Enter title">
                             @error('title')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -27,7 +28,7 @@
                         <!-- Description -->
                         <div class="mb-3">
                             <label for="description" class="form-label">{{ __('Description') }}</label>
-                            <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" rows="4" placeholder="Add description">{{ old('description') }}</textarea>
+                            <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" rows="4" placeholder="Add description">{{ old('description', $ticket->description) }}</textarea>
                             @error('description')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -37,6 +38,11 @@
 
                         <!-- Attachment -->
                         <div class="mb-3">
+                            @if ($ticket->attachment)
+                                <div class="mb-2">
+                                    <a href="{{ asset('storage/' . $ticket->attachment) }}" class="text-primary" target="_blank">{{ __('See Attachment') }}</a>
+                                </div>
+                            @endif
                             <label for="attachment" class="form-label">{{ __('Attachment (if any)') }}</label>
                             <input id="attachment" class="form-control @error('attachment') is-invalid @enderror" type="file" name="attachment">
                             @error('attachment')
@@ -48,7 +54,7 @@
 
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-plus-circle"></i> {{ __('Create') }}
+                                {{ __('Update') }}
                             </button>
                         </div>
                     </form>
