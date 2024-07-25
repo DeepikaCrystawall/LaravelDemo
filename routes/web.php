@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/ticket', TicketController::class);
 });
 
+
 // Route::get('/auth/redirect', function () {
 //     return Socialite::driver('github')
 //     ->scopes(['read:user', 'public_repo'])
