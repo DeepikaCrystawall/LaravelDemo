@@ -36,10 +36,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <li><a href="{{ route('users.index')}}">User</a></li>
+                   
+                        
                         <!-- <li><a href="{{route('ticket.index')}}" class="">Tickets</a></li> -->
+                   
                         @guest
                         @else
+                        @if (\Auth::user()->role_id != 2)
+                        <li><a href="{{ route('users.index')}}">User</a></li>
+                        @endif
                         <li class="nav-item"><a href="{{ route('ticket.create') }}" class="nav-link" >New Ticket</a></li>
 
                         <li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link">All Tickets</a></li>

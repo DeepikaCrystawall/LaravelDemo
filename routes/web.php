@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\Auth\LoginController;
 
 
 Route::get('/', function () {
@@ -11,16 +12,39 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/users', '\App\Http\Controllers\UserController');
-Route::get('/users/delete/{id}', '\App\Http\Controllers\UserController@delete')->name('delete');
+// Route::get('/login',[LoginController::class,'showLoginForm'])->name('login');
+// Route::get('/login',[LoginController::class,'showLoginForm'])->name('login');
 
-Route::resource('/ticket',TicketController::class);
-Route::post('/ticket/{id}/toggle-status', [TicketController::class, 'toggleStatus'])->name('ticket.toggleStatus');
- Route::get('/reply/{ticketid}',[TicketController::class,'replyticket'])->name('reply');
- Route::post('/replyupdate',[TicketController::class,'replyupdate'])->name('replyupdate');
+// Route::post('/authenticate',[LoginController::class,'authenticate'])->name('authenticate');
+// Route::post('logout',[LoginController::class,'logout'])->name('logout');
 
- Route::get('/ticketlisting', [TicketController::class, 'ticketlisting'])->name('ticketlist');
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+     Route::resource('/ticket',TicketController::class);
+     Route::post('/ticket/{id}/toggle-status', [TicketController::class, 'toggleStatus'])->name('ticket.toggleStatus');
+     Route::get('/reply/{ticketid}',[TicketController::class,'replyticket'])->name('reply');
+     Route::post('/replyupdate',[TicketController::class,'replyupdate'])->name('replyupdate');  
+     Route::get('/ticketlisting', [TicketController::class, 'ticketlisting'])->name('ticketlist');
+
+     Route::resource('/users', '\App\Http\Controllers\UserController');
+     Route::get('/users/delete/{id}', '\App\Http\Controllers\UserController@delete')->name('delete');
+});
+Route::middleware(['user'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::resource('/ticket',TicketController::class);
+    // Route::post('/ticket/{id}/toggle-status', [TicketController::class, 'toggleStatus'])->name('ticket.toggleStatus');
+    // Route::get('/reply/{ticketid}',[TicketController::class,'replyticket'])->name('reply');
+    // Route::post('/replyupdate',[TicketController::class,'replyupdate'])->name('replyupdate');
+    Route::get('/ticketlisting', [TicketController::class, 'ticketlisting'])->name('ticketlist');
+});
+
+
+
+
+
 
 
 // Route to display the list of tickets
