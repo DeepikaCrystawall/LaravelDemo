@@ -29,9 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['user'])->group(function () {
         Route::resource('/ticket', TicketController::class)->except(['destroy']);
         Route::get('/ticketlisting', [TicketController::class, 'ticketlisting'])->name('ticketlist');
-        Route::get('/reply/{ticketid}', [TicketController::class, 'replyticket'])->name('reply');
+        
     });
-
+    Route::get('/reply/{ticketid}', [TicketController::class, 'replyticket'])->name('reply');
     // Ensure /ticket and /ticket/create are accessible to both roles
     Route::resource('/ticket', TicketController::class);
 });
