@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+@if (\Auth::user()->role_id != 2)
     <h1>Replies</h1>
 
     <div class="card">
@@ -20,8 +21,18 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
-
+@endif
             <div class="row">
+            <h3>Ticket Details</h3>
+            <div class="container">
+                 <ul>
+                    <li>Title : {{$ticketdetails->title}}</li>
+                    <li>Description : {{$ticketdetails->description}}</li>
+                    <li>Created Date : {{$ticketdetails->created_at}}</li>
+                </ul>
+            </div>
+          
+            @if(!$replies->isEmpty())
                 <h2>Earlier Replies</h2>
                 <div class="container">
                 <ul>
@@ -32,7 +43,9 @@
                 </ul>
                
                 </div>
-               
+            @else
+               <p>No Replies Yet</p>
+            @endif
             </div>
         </div>
     </div>

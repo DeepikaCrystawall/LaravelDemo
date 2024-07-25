@@ -20,8 +20,8 @@
                                 <th>Status</th>
                                 <th>Created By</th>
                                 <th>Created At</th>
-                                @if (\Auth::user()->role_id != 2)
                                 <th>Action</th>
+                                @if (\Auth::user()->role_id != 2)
                                 <th>Change Status</th>
                                 @endif
                             </tr>
@@ -35,12 +35,12 @@
                                     <td>{{ $ticket->user->name }}</td>
                                     <td>{{ $ticket->created_at->format('Y-m-d H:i:s') }}</td>
                                     <td>
-                                    @if (\Auth::user()->role_id != 2)
+                                    
                                     <div class="d-flex align-items-center">
                                         <!-- <a href="{{ route('ticket.show', $ticket->id) }}" class="btn btn-primary">View</a> -->
-                                        <a href="{{ route('reply',['ticketid'=> $ticket->id]) }}" class="btn btn-warning">Reply</a>
+                                        <a href="{{ route('reply',['ticketid'=> $ticket->id]) }}" class="btn btn-warning"><?php echo((\Auth::user()->role_id != 2))?'Reply':'View'?> </a>
                                     </div>
-                                    @endif
+
                                         </td>
                                         <td width="110px;"> 
                                         @if (\Auth::user()->role_id != 2)
