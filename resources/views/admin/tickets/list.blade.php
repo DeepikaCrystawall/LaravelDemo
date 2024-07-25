@@ -6,7 +6,9 @@
     <div class="card">
         <div class="card-body">
             @session('success')
-            <div class="alert alert-success">{{session('success')}}</div>
+            <div class="alert alert-success alert-dismissible fade show">{{session('success')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             @endsession
             @if ($tickets->isEmpty())
                 <p>No tickets found.</p>
