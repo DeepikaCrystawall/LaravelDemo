@@ -32,5 +32,5 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Ensure /ticket and /ticket/create are accessible to both roles
-    Route::resource('/ticket', TicketController::class)->only(['index', 'create']);
+    Route::resource('/ticket', TicketController::class);
 });
