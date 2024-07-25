@@ -20,8 +20,10 @@
                                 <th>Status</th>
                                 <th>Created By</th>
                                 <th>Created At</th>
+                                @if (\Auth::user()->role_id != 2)
                                 <th>Action</th>
                                 <th>Change Status</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -33,18 +35,25 @@
                                     <td>{{ $ticket->user->name }}</td>
                                     <td>{{ $ticket->created_at->format('Y-m-d H:i:s') }}</td>
                                     <td>
+                                    @if (\Auth::user()->role_id != 2)
                                     <div class="d-flex align-items-center">
                                         <!-- <a href="{{ route('ticket.show', $ticket->id) }}" class="btn btn-primary">View</a> -->
                                         <a href="{{ route('reply',['ticketid'=> $ticket->id]) }}" class="btn btn-warning">Reply</a>
                                     </div>
+                                    @endif
                                         </td>
-                                        <td width="110px;"> <select class="form-control status-dropdown"
+                                        <td width="110px;"> 
+                                        @if (\Auth::user()->role_id != 2)
+                                            <select class="form-control status-dropdown"
                                                 data-ticket-id="{{ $ticket->id }}"
                                                 data-toggle-url="{{ route('ticket.toggleStatus', $ticket->id) }}">
+                                                
                                             <option value="open" {{ $ticket->status == 'open' ? 'selected' : '' }}>Open</option>
                                             <option value="resolved" {{ $ticket->status == 'resolved' ? 'selected' : '' }}>Resolved</option>
                                             <option value="rejected" {{ $ticket->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
-                                        </select></td>
+                                        </select>
+                                        @endif
+                                    </td>
 
 
                                 </tr>
