@@ -72,7 +72,7 @@ class CategoryController extends Controller
         $row     = Category::find($id);
         $inputs = $request->all();
         $row->fill($inputs)->save();
-        return redirect()->route('category.index')->with('success','Updated successfully.');
+        return redirect()->route('category.index')->with('success','Updated successfully..');
     }
 
     /**
