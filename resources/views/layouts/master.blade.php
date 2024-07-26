@@ -61,6 +61,9 @@
                         <li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link">All Tickets</a></li> 
                         <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link">All Product Category</a></li> 
                         <li class="nav-item"><a href="{{route('products.index')}}" class="nav-link">All Products</a></li> 
+                        <li class="nav-item"><a href="{{route('blog_list')}}" class="nav-link">Blog</a></li> 
+                        <li class="nav-item"><a href="{{route('posts.index')}}" class="nav-link">Post Management</a></li> 
+                        <li class="nav-item"><a href="{{route('products.index')}}" class="nav-link">All Products</a></li>                         
         </ul>
       </div>
     </div>

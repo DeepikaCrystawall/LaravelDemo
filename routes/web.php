@@ -42,6 +42,11 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('/users', UserController::class);
         Route::get('/users/delete/{id}', [UserController::class, 'delete'])->name('delete');
+
+        Route::resource('/posts', 'App\Http\Controllers\PostController');
+    Route::get('posts/{id}/delete','App\Http\Controllers\PostController@destroy');
+
+    Route::get('/posts/{post}/publish','App\Http\Controllers\PostController@publish');
         
         Route::resource('/category', CategoryController::class);
         Route::get('/category/delete/{id}', [ProductController::class, 'delete'])->name('delete');
@@ -62,6 +67,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reply/{ticketid}', [TicketController::class, 'replyticket'])->name('reply');
     // Ensure /ticket and /ticket/create are accessible to both roles
     Route::resource('/ticket', TicketController::class);
+    Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
+Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'post'])->name('blogs');
     
 });
 
