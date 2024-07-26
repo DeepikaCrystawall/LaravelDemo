@@ -30,9 +30,10 @@ Route::controller(GoogleLoginController::class)->group(function(){
 Route::get('/admin',function(){
     return view('admin-theme.dashboard');
 });
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
+
 
     Route::middleware(['admin'])->group(function () {
         Route::resource('/ticket', TicketController::class);
@@ -68,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reply/{ticketid}', [TicketController::class, 'replyticket'])->name('reply');
     // Ensure /ticket and /ticket/create are accessible to both roles
     Route::resource('/ticket', TicketController::class);
-    // Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
+    Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
 // Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'post'])->name('blogs');
     
 });
