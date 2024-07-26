@@ -13,7 +13,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('ticket');
 });
 
 Auth::routes();
@@ -30,9 +30,10 @@ Route::controller(GoogleLoginController::class)->group(function(){
 Route::get('/admin',function(){
     return view('admin-theme.dashboard');
 });
+Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
+    
 
     Route::middleware(['admin'])->group(function () {
         Route::resource('/ticket', TicketController::class);
