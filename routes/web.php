@@ -6,9 +6,11 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GithubController;
+use App\Http\Controllers\GoogleLoginController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\ProductController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,6 +20,12 @@ Route::controller(GithubController::class)->group(function(){
     Route::get('auth/github', 'redirectToGithub')->name('auth.github');
     Route::get('auth/github/callback', 'handleGithubCallback');
 });
+// GoogleLoginController redirect and callback urls
+Route::controller(GoogleLoginController::class)->group(function(){
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('auth/google/callback', 'handleGoogleCallback');
+});
+
 Route::get('/admin',function(){
     return view('admin-theme.dashboard');
 });
@@ -38,6 +46,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('posts/{id}/delete','App\Http\Controllers\PostController@destroy');
 
     Route::get('/posts/{post}/publish','App\Http\Controllers\PostController@publish');
+        
+        Route::resource('/products', ProductController::class);
+        Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+        
+
     });
 
     Route::middleware(['user'])->group(function () {
@@ -50,7 +63,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/ticket', TicketController::class);
     Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
 Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'post'])->name('blogs');
+    
 });
+
 
 // Route::get('/auth/redirect', function () {
 //     return Socialite::driver('github')

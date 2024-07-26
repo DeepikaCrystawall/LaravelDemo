@@ -373,7 +373,7 @@ demo = {
 
     gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
     gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-    gradientFill.addColorStop(1, hexToRGB('#2CA8FF', 0.6));
+    gradientFill.addColorStop(1, hexToRGB('#0c2646', 0.6));
 
     var a = {
       type: "bar",
@@ -382,9 +382,9 @@ demo = {
         datasets: [{
           label: "Active Countries",
           backgroundColor: gradientFill,
-          borderColor: "#2CA8FF",
+          borderColor: "#0c2646",
           pointBorderColor: "#FFF",
-          pointBackgroundColor: "#2CA8FF",
+          pointBackgroundColor: "#0c2646",
           pointBorderWidth: 2,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 1,

@@ -38,7 +38,7 @@
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="orange">
+    <div class="sidebar" data-color="blue">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
@@ -61,6 +61,7 @@
                         <li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link">All Tickets</a></li> 
                         <li class="nav-item"><a href="{{route('blog_list')}}" class="nav-link">Blog</a></li> 
                         <li class="nav-item"><a href="{{route('posts.index')}}" class="nav-link">Post Management</a></li> 
+                        <li class="nav-item"><a href="{{route('products.index')}}" class="nav-link">All Products</a></li>                         
         </ul>
       </div>
     </div>

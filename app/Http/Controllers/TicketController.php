@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Notifications\TicketUpdatedNotification;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
@@ -22,15 +23,15 @@ class TicketController extends Controller
        
         $user    = auth()->user();
        
-        $tickets = $user->isAdmin ? Ticket::latest()->get() : $user->tickets;
+        $tickets = (\Auth::user()->role_id != 2)? Ticket::latest()->get() : $user->tickets;
         return view('ticket.index', compact('tickets'));
     }
 
     public function index()
     {
-        $tickets = Ticket::with('user') // Assuming 'user' is the relationship method in Ticket model
-        ->orderBy('created_at', 'desc')
-        ->paginate(10); // Adjust pagination as per your preference
+     $user = \Auth::user();
+     
+        $tickets = ($user->role_id != 2) ? Ticket::with('user')->orderBy('created_at', 'desc')->paginate(10) : Ticket::with('user')->where('user_id',$user->id)->orderBy('created_at', 'desc')->paginate(10);
 
         return view('admin.tickets.list',compact('tickets'));
     }
