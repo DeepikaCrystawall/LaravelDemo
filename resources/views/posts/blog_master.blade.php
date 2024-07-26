@@ -72,23 +72,14 @@
 
 	<div class="main-overlay"></div>
 
-	<!-- header -->
-	@include('posts.utils.blog_header')
+
 
 	@yield('content')
 
 
 
-	<!-- footer -->
-	@include('posts.utils.footer')
-
 </div><!-- end site wrapper -->
 
-<!-- search popup area -->
-@include('posts.utils.search')
-
-<!-- side menu -->
-@include('posts.utils.canva')
 
 
 <!-- JAVA SCRIPTS -->
