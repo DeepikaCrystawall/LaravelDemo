@@ -131,6 +131,8 @@ class TicketController extends Controller
         $ticket->status = $request->status;
         $ticket->save();
 
+        $ticket->user->notify(new TicketUpdatedNotification($ticket));
+
         // Return updated status
         return response()->json(['status' => $ticket->status]);
     }

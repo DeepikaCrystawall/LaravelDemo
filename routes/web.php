@@ -25,6 +25,9 @@ Route::controller(GoogleLoginController::class)->group(function(){
     Route::get('auth/google/callback', 'handleGoogleCallback');
 });
 
+Route::get('/admin',function(){
+    return view('admin-theme.dashboard');
+});
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
