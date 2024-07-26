@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <h1>{{ $title}}</h1>
-
+    <a href="{{ route('products.create')}}" class="btn btn-success mb-4">Create +</a>  
     <div class="card">
         <div class="card-body">
             @session('success')

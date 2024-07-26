@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -31,6 +32,7 @@ Route::get('/admin',function(){
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 
     Route::middleware(['admin'])->group(function () {
         Route::resource('/ticket', TicketController::class);
@@ -41,9 +43,19 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('/users', UserController::class);
         Route::get('/users/delete/{id}', [UserController::class, 'delete'])->name('delete');
+
+        Route::resource('/posts', 'App\Http\Controllers\PostController');
+    Route::get('posts/{id}/delete','App\Http\Controllers\PostController@destroy');
+
+    Route::get('/posts/{post}/publish','App\Http\Controllers\PostController@publish');
         
+        Route::resource('/category', CategoryController::class);
+        Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
+
         Route::resource('/products', ProductController::class);
         Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+
+        
         
 
     });
@@ -56,6 +68,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reply/{ticketid}', [TicketController::class, 'replyticket'])->name('reply');
     // Ensure /ticket and /ticket/create are accessible to both roles
     Route::resource('/ticket', TicketController::class);
+    // Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
+// Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'post'])->name('blogs');
     
 });
 

@@ -3005,7 +3005,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 }
 
 .alert.alert-success {
-  background-color: #1be611;
+  background-color: #28a745;
 }
 
 .alert.alert-danger {
@@ -4180,7 +4180,7 @@ Created using IcoMoon - icomoon.io
 .main-panel>.content {
   padding: 0 30px 30px;
   min-height: calc(100vh - 123px);
-  margin-top: -30px;
+  margin-top: 50px;
 }
 
 .main-panel>.navbar {
