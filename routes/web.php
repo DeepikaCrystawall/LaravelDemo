@@ -34,6 +34,8 @@ Route::get('/admin',function(){
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
+Route::get('/contact-us', [HomeController::class, 'contactus'])->name('contact-us');
+Route::post('/add-contact',[HomeController::class,'addContact'])->name('addcontact');
 Route::middleware(['auth'])->group(function () {
  
     Route::middleware(['admin'])->group(function () {

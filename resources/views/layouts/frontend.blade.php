@@ -76,7 +76,7 @@
                             </div> -->
                             
                             <a href="{{ route('blogs')}}" class="nav-item nav-link">Blogs</a>
-                            <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
+                            <a href="{{route('contact-us')}}" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
