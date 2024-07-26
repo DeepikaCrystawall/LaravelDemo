@@ -49,6 +49,8 @@
                         <li class="nav-item"><a href="{{ route('ticket.create') }}" class="nav-link" >New Ticket</a></li>
 
                         <li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link">All Tickets</a></li>
+                        <li class="nav-item"><a href="{{ route('users.index')}}" class="nav-link">User</a></li>
+
                         @endguest
 
                     </ul>
