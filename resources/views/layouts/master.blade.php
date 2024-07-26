@@ -59,6 +59,8 @@
                         <li class="nav-item"><a href="{{ route('ticket.create') }}" class="nav-link" >New Ticket</a></li>
 
                         <li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link">All Tickets</a></li> 
+                        <li class="nav-item"><a href="{{route('blog_list')}}" class="nav-link">Blog</a></li> 
+                        <li class="nav-item"><a href="{{route('posts.index')}}" class="nav-link">Post Management</a></li> 
         </ul>
       </div>
     </div>
