@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
-  
-<div class="container mt-5">
 @section('content')
+<div class="container mt-5">
+
 @if (session('success'))
         <div class="alert alert-success" id="success-alert">
             {{ session('success') }}

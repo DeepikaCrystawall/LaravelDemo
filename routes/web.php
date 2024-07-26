@@ -19,7 +19,9 @@ Route::controller(GithubController::class)->group(function(){
     Route::get('auth/github', 'redirectToGithub')->name('auth.github');
     Route::get('auth/github/callback', 'handleGithubCallback');
 });
-
+Route::get('/admin',function(){
+    return view('admin-theme.dashboard');
+});
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
