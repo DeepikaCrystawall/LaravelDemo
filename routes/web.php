@@ -32,6 +32,7 @@ Route::get('/admin',function(){
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 
     Route::middleware(['admin'])->group(function () {
         Route::resource('/ticket', TicketController::class);
@@ -49,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/posts/{post}/publish','App\Http\Controllers\PostController@publish');
         
         Route::resource('/category', CategoryController::class);
-        Route::get('/category/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+        Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
 
         Route::resource('/products', ProductController::class);
         Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('delete');
@@ -67,8 +68,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reply/{ticketid}', [TicketController::class, 'replyticket'])->name('reply');
     // Ensure /ticket and /ticket/create are accessible to both roles
     Route::resource('/ticket', TicketController::class);
-    Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
-Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'post'])->name('blogs');
+    // Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
+// Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'post'])->name('blogs');
     
 });
 

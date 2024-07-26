@@ -62,8 +62,7 @@
                         <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link">All Product Category</a></li> 
                         <li class="nav-item"><a href="{{route('products.index')}}" class="nav-link">All Products</a></li> 
                         <li class="nav-item"><a href="{{route('blog_list')}}" class="nav-link">Blog</a></li> 
-                        <li class="nav-item"><a href="{{route('posts.index')}}" class="nav-link">Post Management</a></li> 
-                        <li class="nav-item"><a href="{{route('products.index')}}" class="nav-link">All Products</a></li>                         
+                        <li class="nav-item"><a href="{{route('posts.index')}}" class="nav-link">Post Management</a></li>                         
         </ul>
       </div>
     </div>
@@ -183,6 +182,20 @@
   <script src="/assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <script src="/assets/demo/demo.js"></script>
   @yield('scripts')
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script>
+    $(document).ready(function() {
+    
+    $('.delete').click(function(event) {
+        if (confirm("Delete Record?") == true) {
+            return true;
+        }
+        else{
+            return false;
+        }
+        });
+    });
+</script>
 </body>
 
 </html>

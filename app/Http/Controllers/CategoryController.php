@@ -53,17 +53,26 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(string $id)
     {
         //
+        $row     = Category::find($id);
+        $title    = 'Edit Category';
+        $action   = route('category.update',$id);
+        $btn_name  = 'Update';
+        return view('category.add',compact('title','row','action','btn_name'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, string $id)
     {
         //
+        $row     = Category::find($id);
+        $inputs = $request->all();
+        $row->fill($inputs)->save();
+        return redirect()->route('category.index')->with('success','Updated successfully.');
     }
 
     /**
@@ -73,4 +82,11 @@ class CategoryController extends Controller
     {
         //
     }
+    public function delete(string $id)
+    {
+        //
+        Category::where('id', $id)->delete();
+        return redirect()->route('category.index')->with('success','Deleted successfully.');
+    }
+    
 }

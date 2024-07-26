@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <h1>{{ $title}}</h1>
-    <a href="{{ route('category.create')}}" class="btn btn-success mb-4">Create +</a>  
+    <a href="{{ route('category.create')}}" class="btn btn-primary mb-4">Create +</a>  
     <div class="card">
         <div class="card-body">
             @session('success')
