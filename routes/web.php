@@ -21,6 +21,7 @@ Route::controller(GithubController::class)->group(function(){
     Route::get('auth/github', 'redirectToGithub')->name('auth.github');
     Route::get('auth/github/callback', 'handleGithubCallback');
 });
+
 // GoogleLoginController redirect and callback urls
 Route::controller(GoogleLoginController::class)->group(function(){
     Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
