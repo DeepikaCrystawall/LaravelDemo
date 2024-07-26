@@ -1,3 +1,14 @@
 .brdr-btm {
     border-top: 1px solid #ddd4d4;
 }
+.ul-status {
+    display: flex;
+    list-style: none;
+}
+li.sts-li {
+    display: inline-flex;
+    margin-left: 19px;
+}
+.sts-li p{
+    width: 86px;
+}

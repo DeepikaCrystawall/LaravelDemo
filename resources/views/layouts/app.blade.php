@@ -45,12 +45,13 @@
                         @else
                         @if (\Auth::user()->role_id != 2)
                         <li class="nav-item"><a href="{{ route('users.index')}}" class="nav-link">User</a></li>
+                        <li class="nav-item"><a href="{{route('products.index')}}" class="nav-link">Products</a></li>
                         @endif
                         <li class="nav-item"><a href="{{ route('ticket.create') }}" class="nav-link" >New Ticket</a></li>
 
                         <li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link">All Tickets</a></li>
-                        <li class="nav-item"><a href="{{ route('users.index')}}" class="nav-link">User</a></li>
 
+                        
                         @endguest
 
                     </ul>
