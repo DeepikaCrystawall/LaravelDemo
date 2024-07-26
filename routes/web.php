@@ -13,7 +13,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 Route::get('/', function () {
-    return redirect()->route('ticket');
+    return redirect('/ticket');
 });
 
 Auth::routes();
