@@ -16,6 +16,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 Route::controller(GithubController::class)->group(function(){
     Route::get('auth/github', 'redirectToGithub')->name('auth.github');
