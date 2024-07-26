@@ -1,14 +1,16 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;  // Import HasFactory
 use Illuminate\Database\Eloquent\Model;
-
 
 class Post extends Model
 {
-    protected $table = ('posts');
+    use HasFactory;  // Use the HasFactory trait
+
+    protected $table = 'posts';
     protected $guarded = [];
 
     protected static function boot()
@@ -16,7 +18,7 @@ class Post extends Model
         parent::boot();
 
         static::deleting(function ($post) {
-
+            // Handle model deletion logic if needed
         });
     }
 
