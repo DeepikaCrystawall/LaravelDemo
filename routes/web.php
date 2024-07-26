@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -42,8 +43,13 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/users', UserController::class);
         Route::get('/users/delete/{id}', [UserController::class, 'delete'])->name('delete');
         
+        Route::resource('/category', CategoryController::class);
+        Route::get('/category/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+
         Route::resource('/products', ProductController::class);
         Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+
+        
         
 
     });

@@ -59,6 +59,7 @@
                         <li class="nav-item"><a href="{{ route('ticket.create') }}" class="nav-link" >New Ticket</a></li>
 
                         <li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link">All Tickets</a></li> 
+                        <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link">All Product Category</a></li> 
                         <li class="nav-item"><a href="{{route('products.index')}}" class="nav-link">All Products</a></li> 
         </ul>
       </div>
@@ -130,7 +131,7 @@
       <div class="panel-header panel-header-sm">
      
       </div>
-      <br/>    <br/>    <br/>
+    
     <div class="content">
     @yield('content')
     </div>

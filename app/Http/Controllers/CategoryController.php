@@ -14,6 +14,9 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        $title    = "Product Category";
+        $category     = Category::latest()->get();
+        return view('category.list',compact('title','category'));
     }
 
     /**
@@ -22,6 +25,10 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        $title    = "Add Product Category";
+        $action   = route('category.store');
+        $btn_name  = 'Create';
+        return view('category.add',compact('title','action','btn_name'));
     }
 
     /**
@@ -30,6 +37,9 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $inputs = $request->all();
+        Category::create($inputs);
+         return redirect()->route('category.index')->with('success','Category created successfully.');
     }
 
     /**
