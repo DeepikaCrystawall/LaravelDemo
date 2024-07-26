@@ -21,10 +21,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="form-group">
                 <label for="Phone">Phone</label>
-                <input type="text" class="form-control" id="Phone" name="phone" placeholder="Enter Phone" required value="{{ @$row->description}}">
+                <textarea class="form-control" id="content" name="content" rows="10"></textarea>
             </div>
         </div>
     </div>
