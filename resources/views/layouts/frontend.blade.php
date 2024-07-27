@@ -76,7 +76,7 @@
                                 </div>
                             </div> -->
                             
-                            <a href="{{ route('blogs')}}" class="nav-item nav-link">Blogs</a>
+                            <a href="{{route('blog_list')}}" class="nav-item nav-link">Blogs</a>
                             <a href="{{route('contact-us')}}" class="nav-item nav-link">Contact</a>
                         </div>
                        

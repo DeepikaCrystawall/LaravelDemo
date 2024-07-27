@@ -75,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reply/{ticketid}', [TicketController::class, 'replyticket'])->name('reply');
     // Ensure /ticket and /ticket/create are accessible to both roles
     Route::resource('/ticket', TicketController::class);
-     Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
+    //  Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
      Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('show_blog');
 
     
