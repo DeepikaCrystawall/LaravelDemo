@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
- 
+use Illuminate\Support\Facades\Event;
+use App\Events\UserRegistered;
+use App\Listeners\SendWelcomeEmail;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+
+         // Register event and listener
+         Event::listen(
+            UserRegistered::class,
+            [SendWelcomeEmail::class, 'handle']
+        );
 
     }
 }
