@@ -8,9 +8,12 @@ use App\Mail\SendContactEmail;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Mail;
+use App\Traits\SanitizesInput;
+
 
 class HomeController extends Controller
 {
+    use SanitizesInput;
     /**
      * Create a new controller instance.
      *
@@ -53,6 +56,12 @@ class HomeController extends Controller
     }
     public function addContact(Request $request)
     {
+        // Sanitize individual inputs or an array of inputs
+        $sanitizedInputs = $this->sanitizeInputFields([
+            'name' => $request->input('name'),
+            'message' => $request->input('message'),
+        ]);
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
@@ -60,15 +69,15 @@ class HomeController extends Controller
             ]);
             
            Contact::create([
-            'name'=>$request->name,
+            'name'=>$sanitizedInputs['name'],
             'email'=>$request->email,
-            'message'=>$request->message
+            'message'=>$sanitizedInputs['message']
            ]);
 
            $mailData = [
-            'name'=>$request->name,
+            'name'=>$sanitizedInputs['name'],
             'email'=>$request->email,
-            'message'=>$request->message
+            'message'=>$sanitizedInputs['message']
            ];
            Mail::to('deepika.g@crystawall.com')->queue(new SendContactEmail($mailData));
 
