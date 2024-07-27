@@ -18,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+       // $this->middleware('auth');
     }
 
     /**
@@ -28,6 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+      
         $data['home_products'] = Product::with('category')->get();
         $data['home_category']      = Category::get();
         $data['organic_vegetables'] = Product::with('category')->where('category_id','5')->get();
