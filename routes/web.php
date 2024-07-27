@@ -13,8 +13,9 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\DashboardController;
 Route::get('/', function () {
-    return redirect('/ticket');
+    return redirect('/home');
 });
  
  
@@ -34,9 +35,11 @@ Route::get('/admin',function(){
     return view('admin-theme.dashboard');
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-// Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 Route::get('/blogs', [BlogController::class, 'index'])->name('blog_list');
 Route::get('/productlist', [HomeController::class, 'products'])->name('productlist');
+Route::get('product-details/{id}', [HomeController::class, 'products_details']);
+Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('show_blog');
+Route::get('category/{id}', [HomeController::class, 'products_with_category']);
 
 
 Route::get('/contact-us', [HomeController::class, 'contactus'])->name('contact-us');
@@ -44,6 +47,7 @@ Route::post('/add-contact',[HomeController::class,'addContact'])->name('addconta
 Route::middleware(['auth'])->group(function () {
  
     Route::middleware(['admin'])->group(function () {
+
         Route::resource('/ticket', TicketController::class);
         Route::post('/ticket/{id}/toggle-status', [TicketController::class, 'toggleStatus'])->name('ticket.toggleStatus');
         Route::get('/reply/{ticketid}', [TicketController::class, 'replyticket'])->name('reply');
@@ -76,7 +80,8 @@ Route::middleware(['auth'])->group(function () {
     // Ensure /ticket and /ticket/create are accessible to both roles
     Route::resource('/ticket', TicketController::class);
     //  Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
-     Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('show_blog');
+    Route::resource('/dashboard', DashboardController::class);
+ 
 
     
 });
