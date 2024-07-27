@@ -12,17 +12,15 @@ class BlogController extends Controller
     {
         $posts = Post::get()->all();
         $title = 'Blog | Luis N Vaya | Top Modular Kitchen Service Providers';
-        return view('frontend.blog', compact('posts', 'title'));
+        // return view('frontend.blog', compact('posts', 'title'));
+        return view('frontend/blog', compact('posts', 'title'));
     }
 
-    public function post($id)
+    public function show($id)
     {
+        // Find the post by ID or slug
+        $post = Post::findOrFail($id); // Adjust to your needs
 
-        $postquery = Post::orderBy('id','DESC');
-        $postquery->where('slug',$id);
-        $post = $postquery->first();
-        $title = $post->title;
-
-        return view('posts.show-blog', compact('post', 'title'));
+        return view('frontend.show-blog', compact('post'));
     }
 }

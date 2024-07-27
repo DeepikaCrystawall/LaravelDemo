@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 <div class="container">
-<form action="{{ $action }}" method="post">
+<form action="{{ $action }}" method="post" enctype="multipart/form-data">
     @csrf
     @if(!empty($row))
      @method('PUT')
@@ -13,18 +13,54 @@
                 <input type="text" class="form-control" id="" name="title" placeholder="Enter Title" required value="{{ @$row->title}}">
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="form-group">
-                <label for="EMail">Price</label>
-                <input type="email" class="form-control" id="" name="price" placeholder="Enter Price" required value="{{ @$row->price}}">
+                <label for="price">Price</label>
+                <input type="text" class="form-control" id="" name="price" placeholder="Enter price" required value="{{ @$row->price}}">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="Category">Category</label>
+                <select class="form-control" name="category_id">
+                    @foreach($category as $cat)
+                        <option value="{{ $cat->id }}">{{ $cat->title}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="Phone">Phone</label>
-                <textarea class="form-control" id="content" name="content" rows="10"></textarea>
+                <label for="Short Description">Short Desc</label>
+                <textarea class="form-control"  name="short_desc" rows="10"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <textarea class="form-control" id="myeditor" name="content" rows="10"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Image">Image</label>
+                
+                <input type="file"  name="image" >
+                @if(@$row->image)
+                <!-- <img width="50px" class="mt-10" src="{{ asset('uploads/products/small/'.@$row->image)}}"><br> -->
+                @endif
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Image Alt">Image Alt</label>
+                <input type="text" class="form-control" id="" name="image_alt" placeholder="Enter Title" value="{{ @$row->image_alt}}">
             </div>
         </div>
     </div>

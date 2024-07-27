@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BlogController;
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/ticket');
 });
  
  
@@ -33,7 +34,11 @@ Route::get('/admin',function(){
     return view('admin-theme.dashboard');
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
+// Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
+Route::get('/blogs', [BlogController::class, 'index'])->name('blog_list');
+Route::get('/productlist', [HomeController::class, 'products'])->name('productlist');
+
+
 Route::get('/contact-us', [HomeController::class, 'contactus'])->name('contact-us');
 Route::post('/add-contact',[HomeController::class,'addContact'])->name('addcontact');
 Route::middleware(['auth'])->group(function () {
@@ -70,9 +75,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reply/{ticketid}', [TicketController::class, 'replyticket'])->name('reply');
     // Ensure /ticket and /ticket/create are accessible to both roles
     Route::resource('/ticket', TicketController::class);
-    Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
-// Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'post'])->name('blogs');
-   
+    //  Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
+     Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('show_blog');
+
+    
 });
  
  

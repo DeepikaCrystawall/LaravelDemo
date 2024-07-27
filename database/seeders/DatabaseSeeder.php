@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Ticket;
+use App\Models\Post;  // Import the Post model
+use App\Models\User;  // Import the Post model
+use App\Models\Ticket;  // Import the Post model
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
 
         Ticket::factory()->count(20)->create();
 
+        Post::factory(50)->create(); // Use the Post model factory
     }
 }
