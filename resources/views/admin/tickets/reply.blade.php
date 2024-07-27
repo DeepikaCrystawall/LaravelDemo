@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('content')
 <div class="container">   
-    <div class="card">
-        <div class="card-body">
+    <!-- <div class="card"> -->
+        <!-- <div class="card-body"> -->
             <div class="row">
                 <h3>Ticket Details</h3>
                 <div class="container">
@@ -31,11 +31,11 @@
                 </form>
             </div>
             @endif    
-        </div>
-    </div>
-    <div class="card mt-2">
-        <div class="card-body">
-<div class="row  mb-4">
+        <!-- </div> -->
+    <!-- </div> -->
+    <!-- <div class="card mt-2"> -->
+        <!-- <div class="card-body"> -->
+            <div class="row  mb-4">
             @if(!$replies->isEmpty())
                 <h2>Replies</h2>
                 <div class="container">
@@ -59,8 +59,8 @@
             @else
                <p>No Replies Yet</p>
             @endif    
-        </div>
-</div>
-</div>
+           </div>
+        <!-- </div> -->
+<!-- </div> -->
 </div>
 @endsection
