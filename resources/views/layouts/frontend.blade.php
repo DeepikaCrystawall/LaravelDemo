@@ -77,7 +77,7 @@
                             </div> -->
                             
                             <a href="{{ route('blogs')}}" class="nav-item nav-link">Blogs</a>
-                            <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
+                            <a href="{{route('contact-us')}}" class="nav-item nav-link">Contact</a>
                         </div>
                        
                     </div>

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 
+use App\Mail\SendContactEmail;
+use App\Models\Contact;
 use Illuminate\Http\Request;
+use Mail;
 
 class HomeController extends Controller
 {
@@ -15,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+       // $this->middleware('auth');
     }
 
     /**
@@ -41,5 +44,34 @@ class HomeController extends Controller
         $data['categorys']      = Category::get();
         $data['products']       = Product::with('category')->get();
         return view('frontend/product',$data);
+    }
+    public function contactus()
+    {
+        return view('frontend/contactus');
+
+    }
+    public function addContact(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'message' => 'required'
+            ]);
+            
+           Contact::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'message'=>$request->message
+           ]);
+
+           $mailData = [
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'message'=>$request->message
+           ];
+           Mail::to('deepika.g@crystawall.com')->queue(new SendContactEmail($mailData));
+
+           return back()->with('success', 'Thanks for contacting us!');
+
     }
 }
