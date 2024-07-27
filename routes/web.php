@@ -13,6 +13,9 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\EmailBatchController;
+
+Route::get('/dispatch-emails', [EmailBatchController::class, 'dispatchBatch']);
 Route::get('/', function () {
     return redirect('/ticket');
 });
