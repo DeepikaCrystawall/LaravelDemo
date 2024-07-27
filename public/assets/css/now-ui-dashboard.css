@@ -1784,9 +1784,9 @@ textarea.form-control:active {
 }
 
 .form-group input[type=file] {
-  opacity: 0;
+  opacity: 1;
   position: absolute;
-  top: 0;
+  top: 30px;
   right: 0;
   bottom: 0;
   left: 0;
