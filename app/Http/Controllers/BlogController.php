@@ -12,7 +12,8 @@ class BlogController extends Controller
     {
         $posts = Post::get()->all();
         $title = 'Blog | Luis N Vaya | Top Modular Kitchen Service Providers';
-        return view('frontend.blog', compact('posts', 'title'));
+        // return view('frontend.blog', compact('posts', 'title'));
+        return view('frontend/blog', compact('posts', 'title'));
     }
 
     public function show($id)

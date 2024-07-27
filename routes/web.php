@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BlogController;
 Route::get('/', function () {
     return redirect('/ticket');
 });
@@ -33,7 +34,8 @@ Route::get('/admin',function(){
     return view('admin-theme.dashboard');
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
+// Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
+Route::get('/blogs', [BlogController::class, 'index'])->name('blog_list');
 Route::get('/productlist', [HomeController::class, 'products'])->name('productlist');
 
 
