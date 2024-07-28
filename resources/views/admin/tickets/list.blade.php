@@ -22,8 +22,7 @@
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Status</th>
-                                <th>Created By</th>
-                                <th>Created At</th>
+                                <th>Created By</th>                              
                                 <th>Action</th>
                                 @if (\Auth::user()->role_id != 2)
                                 <th>Change Status</th>
@@ -38,13 +37,25 @@
                                     </td>
                                     <td>{{ $ticket->description }}</td>
                                     <td>{{ $ticket->status }}</td>
-                                    <td>{{ $ticket->user->name }}</td>
-                                    <td>{{ $ticket->created_at->format('Y-m-d H:i:s') }}</td>
+                                    <td>{{ $ticket->user->name }}</td>                                  
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <a href="{{ route('reply', ['ticketid' => $ticket->id]) }}" class="btn btn-warning">
+                                            <a href="{{ route('reply', ['ticketid' => $ticket->id]) }}" class="btn btn-warning me-2">
                                                 {{ \Auth::user()->role_id != 2 ? 'Reply' : 'View' }}
                                             </a>
+                                            <a href="{{ route('ticket.show', $ticket->id) }}" class="btn btn-info me-2">
+                                                <i class="fas fa-eye"></i> <!-- View Icon -->
+                                            </a>
+                                            <a href="{{ route('ticket.edit', $ticket->id) }}" class="btn btn-primary me-2">
+                                                <i class="fas fa-edit"></i> <!-- Edit Icon -->
+                                            </a>
+                                            <form action="{{ route('ticket.destroy', $ticket->id) }}" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this ticket?');">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> <!-- Delete Icon -->
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                     @if (\Auth::user()->role_id != 2)
