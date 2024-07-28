@@ -56,12 +56,9 @@
                         @if (\Auth::user()->role_id != 2)
                         <li class="nav-item"><a href="{{ route('users.index')}}" class="nav-link">User</a></li>
                         @endif
-                        <li class="nav-item"><a href="{{ route('ticket.create') }}" class="nav-link" >New Ticket</a></li>
-
                         <li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link">All Tickets</a></li> 
                         <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link">All Product Category</a></li> 
-                        <li class="nav-item"><a href="{{route('products.index')}}" class="nav-link">All Products</a></li> 
-                        <li class="nav-item"><a href="{{route('blog_list')}}" class="nav-link">Blog</a></li> 
+                        <li class="nav-item"><a href="{{route('products.index')}}" class="nav-link">All Products</a></li>                         
                         <li class="nav-item"><a href="{{route('posts.index')}}" class="nav-link">Post Management</a></li>                         
         </ul>
       </div>
@@ -125,6 +122,17 @@
                     </span>
 </p>       </a>        
               </li>
+              <li class="nav-item">   
+    <a>          
+        <p>
+            <span class="d-lg-none d-md-block">
+                <a class="dropdown-item" style="color:blue" href="{{route('blog_list')}}">
+                    {{ __('Visit Blogs') }}
+                </a>
+            </span>
+        </p>
+    </a>        
+</li>
             </ul>
           </div>
         </div>

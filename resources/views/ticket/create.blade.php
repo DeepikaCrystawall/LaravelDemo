@@ -4,6 +4,9 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
+        <a href="{{ route('ticket.index') }}" class="btn btn-secondary">
+                                <i class="bi bi-card-list"></i> {{ __('Ticket List') }}
+                            </a>
             <div class="card shadow-sm border-light">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">{{ __('Create New Support Ticket') }}</h5>
@@ -46,7 +49,8 @@
                             @enderror
                         </div>
 
-                        <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-between">
+                           
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-plus-circle"></i> {{ __('Create') }}
                             </button>

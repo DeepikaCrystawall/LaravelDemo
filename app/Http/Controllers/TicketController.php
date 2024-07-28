@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Replies;
-
 use App\Models\Ticket;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -20,20 +19,16 @@ class TicketController extends Controller
      */
     public function ticketlisting()
     {
-       
-        $user    = auth()->user();
-       
-        $tickets = (\Auth::user()->role_id != 2)? Ticket::latest()->get() : $user->tickets;
+        $user = auth()->user();
+        $tickets = (\Auth::user()->role_id != 2) ? Ticket::latest()->get() : $user->tickets;
         return view('ticket.index', compact('tickets'));
     }
 
     public function index()
     {
-     $user = \Auth::user();
-     
-        $tickets = ($user->role_id != 2) ? Ticket::with('user')->orderBy('created_at', 'desc')->paginate(10) : Ticket::with('user')->where('user_id',$user->id)->orderBy('created_at', 'desc')->paginate(10);
-
-        return view('admin.tickets.list',compact('tickets'));
+        $user = \Auth::user();
+        $tickets = ($user->role_id != 2) ? Ticket::with('user')->orderBy('created_at', 'desc')->paginate(10) : Ticket::with('user')->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.tickets.list', compact('tickets'));
     }
 
     /**
@@ -41,26 +36,27 @@ class TicketController extends Controller
      */
     public function create()
     {
-        return view('ticket.create');
+        //      $products = Product::all(); // Fetch all products from the database
+        return view('ticket.create'); // Pass products to the view
     }
 
-     /**
+    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreTicketRequest $request)
     {
-        
         $ticket = Ticket::create([
             'title'       => $request->title,
             'description' => $request->description,
             'user_id'     => auth()->id(),
+            'product_id'  => $request->product_id, // Add product_id
         ]);
 
         if ($request->file('attachment')) {
             $this->storeAttachment($request, $ticket);
-        }        
-        return redirect()->route('ticket.index')->with('success','Ticket created successfully.');
-       
+        }
+
+        return redirect()->route('ticket.index')->with('success', 'Ticket created successfully.');
     }
 
     /**
@@ -87,16 +83,15 @@ class TicketController extends Controller
         $ticket->update($request->except('attachment'));
 
         if ($request->has('status')) {
-            // $user = User::find($ticket->user_id);
             $ticket->user->notify(new TicketUpdatedNotification($ticket));
         }
 
         if ($request->file('attachment')) {
             Storage::disk('public')->delete($ticket->attachment);
             $this->storeAttachment($request, $ticket);
-        }        
-        return redirect()->route('ticket.index')->with('success','Ticket updated successfully.');
-       
+        }
+
+        return redirect()->route('ticket.index')->with('success', 'Ticket updated successfully.');
     }
 
     /**
@@ -117,7 +112,7 @@ class TicketController extends Controller
         Storage::disk('public')->put($path, $contents);
         $ticket->update(['attachment' => $path]);
     }
-   
+
     public function toggleStatus(Request $request, $id)
     {
         $ticket = Ticket::findOrFail($id);
@@ -140,19 +135,17 @@ class TicketController extends Controller
     public function replyticket(Request $request)
     {
         $ticketid = $request->ticketid;
-        $ticketdetails = Ticket::where('id',$ticketid)->first();        // dd($ticketdetails);
-
-        $replies = Replies::where('ticket_id',$ticketid)->get();
-        return view('admin.tickets.reply',compact('ticketdetails','replies'));
+        $ticketdetails = Ticket::where('id', $ticketid)->first();
+        $replies = Replies::where('ticket_id', $ticketid)->get();
+        return view('admin.tickets.reply', compact('ticketdetails', 'replies'));
     }
+
     public function replyupdate(Request $request, Ticket $ticket)
     {
         // Validate the request
         $validator = $request->validate([
             'content' => 'required|string',
-
         ]);
-
 
         // Create new ticket reply
         $reply = new Replies();
@@ -162,8 +155,6 @@ class TicketController extends Controller
         $reply->user_id = auth()->user()->id;
         $reply->save();
 
-        return redirect()->route('ticket.index')->with('success','Reply submitted successfully.');
-        //response()->json(['message' => 'Reply submitted successfully.']);
+        return redirect()->route('ticket.index')->with('success', 'Reply submitted successfully.');
     }
-
 }
