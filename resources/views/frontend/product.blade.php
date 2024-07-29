@@ -2,11 +2,11 @@
 @section('content')
         <!-- Single Page Header start -->
         <div class="container-fluid page-header py-5">
-            <h1 class="text-center text-white display-6">Shop</h1>
+            <h1 class="text-center text-white display-6">Products</h1>
             <ol class="breadcrumb justify-content-center mb-0">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item active text-white">Shop</li>
+                <li class="breadcrumb-item active text-white">Products</li>
             </ol>
         </div>
         <!-- Single Page Header End -->
@@ -50,7 +50,7 @@
                                                 <li>
                                                     <div class="d-flex justify-content-between fruite-name">
                                                         <a href="#"><i class="fas fa-apple-alt me-2"></i>{{ $ctgry->title}}</a>
-                                                        <span>(3)</span>
+                                                        <span>({{$ctgry->product->count()}})</span>
                                                     </div>
                                                 </li>
                                                 @endforeach
@@ -70,18 +70,18 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $product->category->title}}</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <a href=""><h4>{{$product->title}}</h4></a>
+                                                <a href="{{ url('product-details/'.$product->id)}}"><h4>{{$product->title}}</h4></a>
                                                 <p>{{ $product->short_desc}}</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
                                                     <p class="text-dark fs-5 fw-bold mb-0">AED {{ $product->price}} / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <!-- <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a> -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     @endforeach
                                     
-                                    <div class="col-12">
+                                    <!-- <div class="col-12">
                                         <div class="pagination d-flex justify-content-center mt-5">
                                             <a href="#" class="rounded">&laquo;</a>
                                             <a href="#" class="active rounded">1</a>
@@ -92,7 +92,7 @@
                                             <a href="#" class="rounded">6</a>
                                             <a href="#" class="rounded">&raquo;</a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

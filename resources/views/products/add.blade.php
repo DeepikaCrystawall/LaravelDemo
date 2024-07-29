@@ -34,7 +34,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="Short Description">Short Desc</label>
-                <textarea class="form-control"  name="short_desc" rows="10"></textarea>
+                <textarea class="form-control"  name="short_desc" rows="10">{{ @$row->short_desc}}</textarea>
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="Description">Description</label>
-                <textarea class="form-control" id="myeditor" name="content" rows="10"></textarea>
+                <textarea class="form-control" id="myeditor" name="description" rows="10">{{ @$row->description}}</textarea>
             </div>
         </div>
     </div>

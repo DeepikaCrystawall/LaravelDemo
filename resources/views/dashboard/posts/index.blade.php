@@ -78,7 +78,7 @@
                                             @endphp
                                             <a href="{{ url("/posts/{$post->id}/publish") }}" class="btn btn-warning btn-sm">{{ $label }}</a>
                                         @endcan
-                                        <a href="{{ url("/posts/{$post->id}") }}" class="btn btn-success btn-sm"><i class="fa fa-eye"></i> Show</a>
+                                        <a href="{{ url("/blog/{$post->id}") }}" class="btn btn-success btn-sm"><i class="fa fa-eye"></i> Show</a>
                                         <a href="{{ url("/posts/{$post->id}/edit") }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Edit</a>
                                         <a href="{{ url("/posts/{$post->id}/delete") }}" class="btn btn-danger btn-sm" data-method="DELETE" data-token="{{ csrf_token() }}" data-confirm="Are you sure?"><i class="fa fa-trash"></i> Delete</a>
                                     </td>
