@@ -70,6 +70,11 @@ class HomeController extends Controller
         $data['categorys']      = Category::get();
         return view('frontend/product',$data);
     }
+    // User My account
+    public function my_account()
+    {
+        return view('frontend/my_account',$data);
+    }
 
     public function contactus()
     {

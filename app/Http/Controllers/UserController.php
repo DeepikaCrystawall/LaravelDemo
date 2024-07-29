@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         //
         $title    = "Users";
-        $users     = User::where('role_id',1)->get();
+        $users     = User::where('role_id',2)->get();
         return view('users.list',compact('title','users'));
     }
 

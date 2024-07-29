@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -12,9 +13,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // if(Auth::user()->role_id != 1)
-        // return view('my_account');
-        // else
+        if(Auth::user()->role_id != 1)
+        return view('frontend/my_account');
+        else
         return view('admin/dashboard');
     }
 

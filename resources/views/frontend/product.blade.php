@@ -49,7 +49,7 @@
                                                 
                                                 <li>
                                                     <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>{{ $ctgry->title}}</a>
+                                                        <a href="{{ url('category/' . $ctgry->id) }}"><i class="fas fa-apple-alt me-2"></i>{{ $ctgry->title}}</a>
                                                         <span>({{$ctgry->product->count()}})</span>
                                                     </div>
                                                 </li>
