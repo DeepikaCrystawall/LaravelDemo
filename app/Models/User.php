@@ -71,4 +71,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ticket::class);
     }
+    public function product(): HasMany
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }

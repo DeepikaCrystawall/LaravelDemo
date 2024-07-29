@@ -494,4 +494,135 @@
     line-height: 35px;
 }
 /*** Footer End ***/
+/* Custom */
+.user-links a{
+    margin-right: 15px;
+}
+.tab_navigation {
+    border: 1px solid #f2f3f5;
+}
+.tab_navigation .nav-item .active {
+    background-color: #f2f3f5;
+}
+
+
+.container .topic{
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .content input[type="radio"]{
+    display: none;
+  }
+  
+  .content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .content .list{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 20%;
+    margin-right: 50px;
+  }
+  
+  .content .list label{
+    cursor: pointer;
+    height: 50px;
+    line-height: 60px;
+    font-size: 16px;
+    font-weight: 500;
+    /* color: rgba(255, 255, 255, 0.5); */
+    padding-left: 25px;
+    transition: all 0.5s ease;
+    z-index: 10;
+  }
+  
+  #home:checked ~ .list label.home,
+  #blog:checked ~ .list label.blog,
+  #help:checked ~ .list label.help,
+  #code:checked ~ .list label.code,
+  #about:checked ~ .list label.about{
+    color: var(--bs-primary);;
+  }
+  
+  .content .slider{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 60px;
+    width: 100%;
+    border-radius: 4px;
+    transition: all 0.5s ease;
+    background: #f2f3f5;
+  }
+  
+  #home:checked ~ .list .slider{
+    top: 0;
+  }
+  
+  #blog:checked ~ .list .slider{
+    top: 60px;
+  }
+  
+  #help:checked ~ .list .slider{
+    top: 120px;
+  }
+  
+  #code:checked ~ .list .slider{
+    top: 180px;
+  }
+  
+  #about:checked ~ .list .slider{
+    top: 240px;
+  }
+  
+  .content .text-content{
+    width: 80%;
+    height: 100%;
+    /* color: rgba(255, 255, 255, 0.7); */
+  }
+  
+  .content .text{
+    display: none;
+  }
+  
+  .content .text .title{
+    font-size: 21px;
+    margin-bottom: 7px;
+    margin-top: 41px;
+    font-weight: 500;
+  }
+  
+  .container .text p{
+    text-align: justify;
+  }
+  
+  .content .text-content .home{
+    display: block;
+  }
+  
+  #home:checked ~ .text-content .home,
+  #blog:checked ~ .text-content .blog,
+  #help:checked ~ .text-content .help,
+  #code:checked ~ .text-content .code,
+  #about:checked ~ .text-content .about{
+    display: block;
+  }
+  
+  #blog:checked ~ .text-content .home,
+  #help:checked ~ .text-content .home,
+  #code:checked ~ .text-content .home,
+  #about:checked ~ .text-content .home{
+    display: none;
+  }
+  
+  .content .list label:hover{
+    color: var(--bs-primary);
+  }
 

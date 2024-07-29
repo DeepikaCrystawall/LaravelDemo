@@ -54,6 +54,7 @@ Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'show'])->
 Route::get('/productlist', [HomeController::class, 'products'])->name('productlist');
 Route::get('product-details/{id}', [HomeController::class, 'products_details']);
 Route::get('category/{id}', [HomeController::class, 'products_with_category']);
+Route::get('/user-login', [HomeController::class, 'user_login'])->name('user-login');
 
 
 Route::get('/contact-us', [HomeController::class, 'contactus'])->name('contact-us');
@@ -88,7 +89,14 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['user'])->group(function () {
         Route::resource('/ticket', TicketController::class)->except(['destroy']);
         Route::get('/ticketlisting', [TicketController::class, 'ticketlisting'])->name('ticketlist');
+
+        
         Route::get('/my-account', [HomeController::class, 'my_account'])->name('my-account');
+        Route::get('/user-logout', [HomeController::class, 'user_logout'])->name('user-logout');
+        Route::post('/profile-update', [HomeController::class, 'profile_update'])->name('profile-update');
+        Route::post('/view-tickets', [HomeController::class, 'view_ticket'])->name('view-tickets');
+        
+       
 
        
     });

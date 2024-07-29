@@ -22,4 +22,8 @@ class Ticket extends Model
         return $this->belongsTo(User::class,'status_changed_by_id');
 
     }
+    public function product()
+    {
+        return $this->belongsTo(Product::class,'product_id');
+    }
 }

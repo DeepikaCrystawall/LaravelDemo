@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Replies;
+use App\Models\Ticket;
 
 use App\Mail\SendContactEmail;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Mail;
 use App\Traits\SanitizesInput;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 
 class HomeController extends Controller
@@ -73,7 +77,56 @@ class HomeController extends Controller
     // User My account
     public function my_account()
     {
-        return view('frontend/my_account',$data);
+        $tickets = Ticket::with('product')->where('user_id',Auth::user()->id)->get();;
+        return view('frontend/my_account',compact('tickets'));
+    }
+
+    public function user_login(){
+        return view('frontend/login');
+    }
+    public function profile_update(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required'
+        ]);
+        $inputs  = $request->all();
+        $row     = User::find(Auth::user()->id);
+        // print_r($row); exit;
+        $row->fill($inputs)->save();
+        return redirect()->route('my-account')->with('success','Profile Updated');
+    }
+    public function view_ticket(Request $request)
+    {
+        $ticket_id = $request->ticket_id;
+        $replies = Replies::where('ticket_id', $ticket_id)->get();
+        if($replies) 
+        {
+            $otput = '<table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Reply</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>';
+                foreach($replies as $reply){
+                $otput .='<tr>
+                        <td>'.$reply->body.'</td>
+                        <td>'.$reply->created_at.'</td>
+                    </tr>';
+                }
+                $otput .='</tbody>
+            </table>';
+            echo $otput;
+        }      
+        else
+            echo "No Replies";
+    }
+    public function user_logout()
+    {
+            Auth::logout();
+            return redirect('/home'); # add you login route 
     }
 
     public function contactus()
