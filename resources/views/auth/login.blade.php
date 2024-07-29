@@ -67,7 +67,7 @@
                         </div>
                     </form>
      
-                    <div class="row mb-0">
+                    <div class="row mb-0 sigup">
                             <div class="col-md-6 offset-md-4 mt-2">
                                <a class="btn btn-dark" href="{{ route('auth.github') }}"
                                 style="display: block;">
@@ -78,15 +78,19 @@
                                 Login with Github
                             </a>
                             </div>
+                            {{-- Laracoding Login with Google Demo--}}
+                            <div class="col-md-6 offset-md-4 mt-2">
+                                <div class="block mt-4">
+                                    <div class="flex items-center justify-end mt-4">
+                                        <a href="{{ url('auth/google') }}">
+                                            <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                        {{-- Laracoding Login with Google Demo--}}
-            <div class="block mt-4">
-                <div class="flex items-center justify-end mt-4">
-                    <a href="{{ url('auth/google') }}">
-                        <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png">
-                    </a>
-                </div>
-            </div>
+             
             <div class="row mb-0">
             <div class="col-md-6 offset-md-4 mt-2">
                         <a href="{{ route('facebook.login') }}" class="btn btn-facebook btn-user btn-block">
@@ -94,6 +98,8 @@
             Login with Facebook
             </a>
             </div></div>
+                        
+            
 
                 </div>
             </div>
