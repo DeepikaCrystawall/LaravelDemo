@@ -13,6 +13,9 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\EmailBatchController;
+
+Route::get('/dispatch-emails', [EmailBatchController::class, 'dispatchBatch']);
 use App\Http\Controllers\DashboardController;
 Route::get('/', function () {
     return redirect('/home');
@@ -20,6 +23,8 @@ Route::get('/', function () {
  
  
 Auth::routes();
+
+// GithubController redirect and callback urls
 Route::controller(GithubController::class)->group(function(){
     Route::get('auth/github', 'redirectToGithub')->name('auth.github');
     Route::get('auth/github/callback', 'handleGithubCallback');
@@ -35,10 +40,11 @@ Route::get('/admin',function(){
     return view('admin-theme.dashboard');
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Blogs Routes
 Route::get('/blogs', [BlogController::class, 'index'])->name('blog_list');
+Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('show_blog');
 Route::get('/productlist', [HomeController::class, 'products'])->name('productlist');
 Route::get('product-details/{id}', [HomeController::class, 'products_details']);
-Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('show_blog');
 Route::get('category/{id}', [HomeController::class, 'products_with_category']);
 
 
@@ -85,28 +91,4 @@ Route::middleware(['auth'])->group(function () {
 
     
 });
- 
- 
-// Route::get('/auth/redirect', function () {
-//     return Socialite::driver('github')
-//     ->scopes(['read:user', 'public_repo'])
-//     ->redirect();
-// });
- 
-// Route::get('/auth/callback', function () {
-//     $githubUser = Socialite::driver('github')->user();
- 
-//     $user = User::updateOrCreate([
-//         'github_id' => $githubUser->id,
-//     ], [
-//         'name' => $githubUser->name,
-//         'email' => $githubUser->email,
-//         'github_token' => $githubUser->token,
-//         'github_refresh_token' => $githubUser->refreshToken,
-//     ]);
- 
-//     Auth::login($user);
-//  dd($user);
-//     return redirect('/home');
-// });
  
