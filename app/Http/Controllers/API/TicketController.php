@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Notifications\TicketUpdatedNotification;
+use Illuminate\Http\Response;
 
 
 //use Illuminate\Support\Facades\Auth;
@@ -69,7 +70,9 @@ class TicketController extends BaseController
             $this->storeAttachment($request, $ticket);
         }    
 
-        return $this->sendResponse($ticket, 'Ticket created successfully.');
+        return $this->sendResponse($ticket, 'Ticket created successfully.', Response::HTTP_CREATED);
+
+       // return $this->sendResponse($ticket, 'Ticket created successfully.');
     }
 
     /**
@@ -119,8 +122,8 @@ class TicketController extends BaseController
             'title'=>$request->title,
             'description' =>$request->description,            
         ]);
-        return $this->sendResponse($ticket,'Ticket Updated');
-
+        return $this->sendResponse($ticket,'Ticket Updated',Response::HTTP_OK);
+       
     }
 
     /**
@@ -128,9 +131,11 @@ class TicketController extends BaseController
      */
     public function destroy(string $id)
     {
+       // return $this->sendResponse('','Ticket Deleted');
         Ticket::destroy($id);
-        return $this->sendResponse('','Ticket Deleted');
 
+        // Return a 204 No Content response
+        return $this->sendResponse(null,'Ticket Deleted', Response::HTTP_NO_CONTENT);
         
     }
 
