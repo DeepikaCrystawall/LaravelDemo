@@ -12,7 +12,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // Auth::user()->role_id != 2
+        // if(Auth::user()->role_id != 1)
+        // return view('my_account');
+        // else
         return view('admin/dashboard');
     }
 

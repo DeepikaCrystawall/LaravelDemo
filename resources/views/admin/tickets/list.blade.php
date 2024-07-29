@@ -43,12 +43,14 @@
                                             <a href="{{ route('reply', ['ticketid' => $ticket->id]) }}" class="btn btn-warning me-2">
                                                 {{ \Auth::user()->role_id != 2 ? 'Reply' : 'View' }}
                                             </a>
+                                            @if(Auth::user()->role_id != 2)
                                             <a href="{{ route('ticket.show', $ticket->id) }}" class="btn btn-info me-2">
                                                 <i class="fas fa-eye"></i> <!-- View Icon -->
                                             </a>
                                             <a href="{{ route('ticket.edit', $ticket->id) }}" class="btn btn-primary me-2">
                                                 <i class="fas fa-edit"></i> <!-- Edit Icon -->
                                             </a>
+                                            @endif
                                             <form action="{{ route('ticket.destroy', $ticket->id) }}" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this ticket?');">
                                                 @method('delete')
                                                 @csrf
