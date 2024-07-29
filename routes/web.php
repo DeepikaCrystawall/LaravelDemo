@@ -80,6 +80,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['user'])->group(function () {
         Route::resource('/ticket', TicketController::class)->except(['destroy']);
         Route::get('/ticketlisting', [TicketController::class, 'ticketlisting'])->name('ticketlist');
+        Route::get('/my-account', [HomeController::class, 'my_account'])->name('my-account');
+
        
     });
     Route::get('/reply/{ticketid}', [TicketController::class, 'replyticket'])->name('reply');
