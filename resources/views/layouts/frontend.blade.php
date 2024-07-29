@@ -80,11 +80,19 @@
                             <a href="{{route('contact-us')}}" class="nav-item nav-link">Contact</a>
                             
                         </div>
-                        <div class="d-flex m-3 me-0">
-                            
-                            <a href="{{ route('login')}}" class="my-auto">
+                        <div class="d-flex m-3 me-0 user-links">
+                        @if(Auth::check())
+                            <a href="{{ route('my-account')}}" class="my-auto"><i class="fas fa-user "></i> My Account 
+                                
+                            </a>
+                            <a href="{{ route('user-logout')}}" class="my-auto pr-4"><i class="fas fas fa-sign-out-alt"></i> Logout 
+                                
+                            </a>
+                        @else
+                            <a href="{{ route('user-login')}}" class="my-auto">
                                 <i class="fas fa-user fa-2x"></i>
                             </a>
+                        @endif
                         </div>
                        
                     </div>
@@ -219,6 +227,14 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('assets/web/js/main.js') }}"></script>
+    <script>
+          $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    </script>
+    @yield('scripts')
     </body>
 
 </html>
