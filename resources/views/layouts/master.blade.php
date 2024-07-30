@@ -108,20 +108,15 @@
                 </div>
               </li> -->
               <li class="nav-item">   
-                <a>          
-                  <p>
-                    <span class="d-lg-none d-md-block">
-                    <a class="dropdown-item" style="color:orange" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                <a><p><span class="d-lg-none d-md-block">
+                    <a class="dropdown-item" style="color:orange" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">{{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                    </form>
                     </span>
-</p>       </a>        
+                  </p></a>        
               </li>
               <li class="nav-item">   
     <a>          

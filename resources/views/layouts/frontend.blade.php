@@ -82,12 +82,19 @@
                         </div>
                         <div class="d-flex m-3 me-0 user-links">
                         @if(Auth::check())
-                            <a href="{{ route('my-account')}}" class="my-auto"><i class="fas fa-user "></i> My Account 
-                                
+                          @if(Auth::user()->role_id=='2')
+                            <a href="{{ route('my-account')}}" class="my-auto"><i class="fas fa-user "></i> My Account</a>
+                            <a href="{{ route('user-logout')}}" class="my-auto pr-4"><i class="fas fas fa-sign-out-alt"></i> Logout</a>
+                          @else
+                            <a href="{{ route('dashboard.index')}}" class="my-auto"><i class="fas fa-user "></i> Dashboard</a>
+                            <!-- <a href="{{ route('logout')}}" class="my-auto pr-4"><i class="fas fas fa-sign-out-alt"></i> Logout</a> -->
+                            <a class="my-auto pr-4" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
                             </a>
-                            <a href="{{ route('user-logout')}}" class="my-auto pr-4"><i class="fas fas fa-sign-out-alt"></i> Logout 
-                                
-                            </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                </form>            
+                        @endif
                         @else
                             <a href="{{ route('user-login')}}" class="my-auto">
                                 <i class="fas fa-user fa-2x"></i>
