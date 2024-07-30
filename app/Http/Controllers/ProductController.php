@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductController extends Controller
 {
+    public function __construct(){
+        view()->share('pro_menuactive','active');
+    }
     /**
      * Display a listing of the resource.
      */
