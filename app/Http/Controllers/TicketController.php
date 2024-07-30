@@ -11,6 +11,7 @@ use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Notifications\TicketUpdatedNotification;
 use Illuminate\Support\Facades\Auth;
+use App\Events\TicketCreation;
 
 class TicketController extends Controller
 {
@@ -58,6 +59,7 @@ class TicketController extends Controller
         if ($request->file('attachment')) {
             $this->storeAttachment($request, $ticket);
         }
+        event(new TicketCreation($ticket));
 
         return redirect()->route('ticket.index')->with('success', 'Ticket created successfully.');
     }
