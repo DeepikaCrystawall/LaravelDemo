@@ -5,6 +5,8 @@ namespace App\Listeners;
 use App\Events\TicketCreation;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Mail\TicketMail;
+use Illuminate\Support\Facades\Mail;
 
 class SendEmailNotification
 {
@@ -22,6 +24,6 @@ class SendEmailNotification
     public function handle(TicketCreation $event): void
     {
         //
-        Mail::to($event->ticket->email)->send(new WelcomeMail($event->ticket));
+        Mail::to('test@example.com')->send(new TicketMail($event->ticket));
     }
 }

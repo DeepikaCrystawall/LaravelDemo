@@ -77,6 +77,7 @@ class HomeController extends Controller
     // User My account
     public function my_account()
     {
+   
         $tickets = Ticket::with('product')->where('user_id',Auth::user()->id)->get();;
         return view('frontend/my_account',compact('tickets'));
     }
@@ -99,8 +100,9 @@ class HomeController extends Controller
     public function view_ticket(Request $request)
     {
         $ticket_id = $request->ticket_id;
+       
         $replies = Replies::where('ticket_id', $ticket_id)->get();
-        if($replies) 
+        if(!$replies->isEmpty()) 
         {
             $otput = '<table class="table table-striped">
                 <thead>
@@ -118,15 +120,18 @@ class HomeController extends Controller
                 }
                 $otput .='</tbody>
             </table>';
-            echo $otput;
+            
         }      
         else
-            echo "No Replies";
+        {
+            $otput ='<div>No Replies</div>';
+        }
+        echo $otput;
     }
     public function user_logout()
     {
             Auth::logout();
-            return redirect('/home'); # add you login route 
+            return redirect('/user-login'); # add you login route 
     }
 
     public function contactus()
