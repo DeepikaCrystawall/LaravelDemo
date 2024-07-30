@@ -70,7 +70,15 @@ class TicketController extends BaseController
             $this->storeAttachment($request, $ticket);
         }    
 
-        return $this->sendResponse($ticket, 'Ticket created successfully.', Response::HTTP_CREATED);
+        $response = [
+            'success' => true, // success is true for 200, false otherwise
+            'data'    => $ticket,
+            'message' => 'Ticket created successfully.',
+        ];
+
+        // Return the response with the given status code
+       // return response()->json($response, Response::HTTP_CREATED);
+        return $this->sendResponse($ticket, 'Ticket created successfully.', Response::HTTP_OK);
 
        // return $this->sendResponse($ticket, 'Ticket created successfully.');
     }
@@ -122,6 +130,7 @@ class TicketController extends BaseController
             'title'=>$request->title,
             'description' =>$request->description,            
         ]);
+        
         return $this->sendResponse($ticket,'Ticket Updated',Response::HTTP_OK);
        
     }

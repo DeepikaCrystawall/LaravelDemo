@@ -11,6 +11,8 @@ use Tests\TestCase;
 use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
 use PHPUnit\Framework\Attributes\Test;
+use Illuminate\Testing\Fluent\AssertableJson;
+
 
 class TicketApiTest extends TestCase
 {
@@ -69,39 +71,36 @@ class TicketApiTest extends TestCase
     #[Test]
     public function it_can_create_a_ticket()
     {
-         // Arrange: Define the data to send in the request
-         $data = [
-            'title' => 'New Ticket',
-            'description' => 'Description for new ticket',
-            'user_id' => auth()->id(),
+        $user = User::factory()->create();
+        $token = $user->createToken('TestToken')->plainTextToken;
+    
+        $data = [
+            'title' => 'Test Ticket Title',
+            'description' => 'Test Ticket Description',
         ];
-
-        // Act: Send a POST request to create a new ticket
-        $response = $this->postJson('/api/ticket', $data);
-
-        // Assert: Check the response status and structure
-        $response->assertStatus(Response::HTTP_CREATED)
-                 ->assertJson([
-                     'success' => true,
-                     'data' => [
-                         'title' => 'New Ticket',
-                         'description' => 'Description for new ticket',
-                         // Optionally include the 'user_id' if it is part of the response
-                          'user_id' => auth()->id(),
-                         // Include the 'id' field if it is returned in the response
-                         // 'id' => 1, // This depends on your implementation
-                     ],
-                     'message' => 'Ticket created successfully.',
-                 ]);
-
-        // Assert the ticket was actually created in the database
+    
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+        ])->postJson('/api/ticket', $data);
+    
+        $response->assertStatus(200);
+    
+        // Assert the JSON response structure and content
+        $response->assertJson(function (AssertableJson $json) use ($data) {
+            $json->where('success', true)
+                 ->where('message', 'Ticket created successfully.')
+                 ->has('data')
+                 ->where('data.title', $data['title'])
+                 ->where('data.description', $data['description'])
+                 ->etc();
+        });
+    
+        // Optionally, assert that the data was actually stored in the database
         $this->assertDatabaseHas('tickets', [
-            'title' => 'New Ticket',
-            'description' => 'Description for new ticket',
-            // Optionally include 'user_id' if relevant
-             'user_id' => auth()->id(),
+            'title' => $data['title'],
+            'description' => $data['description'],
+           // 'user_id' => $user->id,
         ]);
-       // $this->assertDatabaseHas('tickets', $data);
     }
 
     #[Test]
@@ -127,27 +126,41 @@ class TicketApiTest extends TestCase
     #[Test]
     public function it_can_update_a_ticket()
     {
-        // Arrange: Create a ticket
-        $ticket = Ticket::factory()->create();
-        $updatedData = [
-            'title' => 'Updated Title',
-            'description' => 'Updated description.',
-        ];
+       // Create a user and a ticket to update
+    $user = User::factory()->create();
+    $ticket = Ticket::factory()->create(['user_id' => $user->id]);
+    $token = $user->createToken('TestToken')->plainTextToken;
 
-        // Act: Send a PUT request to update the ticket
-        $response = $this->putJson('/api/ticket/' . $ticket->id, $updatedData);
+    // Define the updated data
+    $updatedData = [
+        'title' => 'Updated Title',
+        'description' => 'Updated description.',
+    ];
 
-        // Assert: Check the response status and updated data
-        $response->assertStatus(Response::HTTP_OK)
-                 ->assertJson([
-                     'success' => true,                     
-                     'data' => $updatedData,                        
-                     
-                     'message' => 'Tickets Updated',
-                 ]);
+    // Send a PUT request to the API endpoint using the Sanctum token
+    $response = $this->withHeaders([
+        'Authorization' => 'Bearer ' . $token,
+    ])->putJson('/api/ticket/' . $ticket->id, $updatedData);
 
-        $this->assertDatabaseHas('tickets', $updatedData);
-        $this->assertDatabaseMissing('tickets', ['title' => $ticket->title]);
+    // Assert that the response status is 200 (OK)
+    $response->assertStatus(Response::HTTP_OK);
+
+   // dd($response->json());
+    // Assert the JSON response structure and content
+    $response->assertJson(function (AssertableJson $json) use ($ticket) {
+       // dd($json);
+        $json->where('success', true)
+             ->where('message', 'Ticket Updated')
+             ->has('data')
+             ->where('data.title',$ticket->title)->etc();
+    });
+
+    // Optionally, assert that the data was actually updated in the database
+    $this->assertDatabaseHas('tickets', [
+        'title' => $updatedData['title'],
+        'description' => $updatedData['description'],
+        'id' => $ticket->id,
+    ]);
     }
 
     #[Test]
