@@ -14,14 +14,16 @@
 <div class="topic">CSS Vertical Tab</div>
 
 <div class="content">
-    <input type="radio" name="slider" checked id="home">
-    <input type="radio" name="slider" id="blog">
+   
+    <input type="radio" name="slider" {{ request()->query('ticket') != 'ticket' ? 'checked' : '' }} id="home">
+    <input type="radio" name="slider" id="blog" {{ request()->query('ticket') === 'ticket' ? 'checked' : '' }}>
+
     
     <div class="list">
         <label for="home" class="home">
             <span>Profile</span>
         </label>
-        <label for="blog" class="blog">
+        <label for="blog" class="tickets">
             <span>Tickets</span>
         </label>
         
