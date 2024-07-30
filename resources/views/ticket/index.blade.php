@@ -1,7 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
 <div class="container mt-5">
+
+@if (session('success'))
+        <div class="alert alert-success" id="success-alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row mb-4">
         <div class="col-md-6">
             <h1 class="text-primary">Support Tickets</h1>
@@ -24,4 +30,15 @@
         </div>
     </div>
 </div>
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var successAlert = document.getElementByClass('alert-success');
+            if (successAlert) {
+                setTimeout(function () {
+                    successAlert.style.display = 'none';
+                }, 2000);
+            }
+        });
+    </script>
+
 @endsection

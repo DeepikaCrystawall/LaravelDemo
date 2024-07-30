@@ -1,0 +1,25 @@
+.brdr-btm {
+    border-top: 1px solid #ddd4d4;
+}
+.ul-status {
+    display: flex;
+    list-style: none;
+}
+li.sts-li {
+    display: inline-flex;
+    margin-left: 19px;
+}
+.sts-li p{
+    width: 86px;
+}
+.card{
+    word-wrap: break-word;
+    background-clip: border-box;
+    background-color: #fff;
+    border: 0 solid rgba(0, 0, 0, .125);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    position: relative;
+}

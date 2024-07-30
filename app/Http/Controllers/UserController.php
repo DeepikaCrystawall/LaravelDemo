@@ -13,11 +13,14 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct(){
+        view()->share('usr_menuactive','active');
+    }
     public function index()
     {
         //
         $title    = "Users";
-        $users     = User::where('role_id',1)->get();
+        $users     = User::where('role_id',2)->get();
         return view('users.list',compact('title','users'));
     }
 
@@ -43,7 +46,7 @@ class UserController extends Controller
        // $inputs['pwd'] = Str::random(6);
         $inputs['password']= Hash::make(Str::random(6));
         User::create($inputs);
-        return redirect()->route('users.index')->with('success','User created successfully.');
+        return redirect()->route('users.list')->with('success','User created successfully.');
 
         
     }

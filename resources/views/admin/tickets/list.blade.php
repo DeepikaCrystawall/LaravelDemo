@@ -1,13 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.master')
 @section('content')
 <div class="container">
     <h1>Tickets</h1>
-
+    <a href="{{ route('ticket.create')}}" class="btn btn-primary mb-4">Create +</a>  
     <div class="card">
         <div class="card-body">
-            @session('success')
-            <div class="alert alert-success">{{session('success')}}</div>
-            @endsession
+            @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
             @if ($tickets->isEmpty())
                 <p>No tickets found.</p>
             @else
@@ -18,56 +22,69 @@
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Status</th>
-                                <th>Created By</th>
-                                <th>Created At</th>
+                                <th>Created By</th>                              
                                 <th>Action</th>
+                                @if (\Auth::user()->role_id != 2)
                                 <th>Change Status</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($tickets as $ticket)
                                 <tr>
-                                    <td>{{ $ticket->title }}</td>
+                                    <td>
+                                        <a href="{{ route('ticket.show', $ticket->id) }}" class="text-decoration-none text-dark"><b>{{ $ticket->title }}</b></a>
+                                    </td>
                                     <td>{{ $ticket->description }}</td>
                                     <td>{{ $ticket->status }}</td>
-                                    <td>{{ $ticket->user->name }}</td>
-                                    <td>{{ $ticket->created_at->format('Y-m-d H:i:s') }}</td>
+                                    <td>{{ $ticket->user->name }}</td>                                  
                                     <td>
-                                    <div class="d-flex align-items-center">
-                                        <!-- <a href="{{ route('ticket.show', $ticket->id) }}" class="btn btn-primary">View</a> -->
-                                        <a href="{{ route('reply',['ticketid'=> $ticket->id]) }}" class="btn btn-warning">Reply</a>
-                                    </div>
-                                        </td>
-                                        <td width="110px;"> <select class="form-control status-dropdown"
-                                                data-ticket-id="{{ $ticket->id }}"
-                                                data-toggle-url="{{ route('ticket.toggleStatus', $ticket->id) }}">
+                                        <div class="d-flex align-items-center">
+                                            <a href="{{ route('reply', ['ticketid' => $ticket->id]) }}" class="btn btn-warning me-2">
+                                                {{ \Auth::user()->role_id != 2 ? 'Reply' : 'View' }}
+                                            </a>
+                                            @if(Auth::user()->role_id != 2)
+                                            <a href="{{ route('ticket.show', $ticket->id) }}" class="btn btn-info me-2">
+                                                <i class="fas fa-eye"></i> <!-- View Icon -->
+                                            </a>
+                                            <a href="{{ route('ticket.edit', $ticket->id) }}" class="btn btn-primary me-2">
+                                                <i class="fas fa-edit"></i> <!-- Edit Icon -->
+                                            </a>
+                                            @endif
+                                            <form action="{{ route('ticket.destroy', $ticket->id) }}" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this ticket?');">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> <!-- Delete Icon -->
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    @if (\Auth::user()->role_id != 2)
+                                    <td width="110px;">
+                                        <select class="form-control status-dropdown"
+                                            data-ticket-id="{{ $ticket->id }}"
+                                            data-toggle-url="{{ route('ticket.toggleStatus', $ticket->id) }}">
                                             <option value="open" {{ $ticket->status == 'open' ? 'selected' : '' }}>Open</option>
                                             <option value="resolved" {{ $ticket->status == 'resolved' ? 'selected' : '' }}>Resolved</option>
                                             <option value="rejected" {{ $ticket->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
-                                        </select></td>
-
-
+                                        </select>
+                                    </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
                 {{ $tickets->links() }}
-                <!-- Pagination links -->
             @endif
         </div>
     </div>
 </div>
-
-
-
 @endsection
 
 @section('scripts')
-
-<!-- AJAX Script -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
     $(document).ready(function () {
         $('.status-dropdown').change(function () {
@@ -75,19 +92,16 @@
             var toggleUrl = $(this).data('toggle-url');
             var newStatus = $(this).val();
 
-            // Perform AJAX request
             $.ajax({
                 url: toggleUrl,
-                type: 'post', // Assuming your route uses PUT method
+                type: 'post',
                 data: {
                     _token: '{{ csrf_token() }}',
                     status: newStatus
                 },
                 success: function (response) {
-                    // Optional: Show success message or update UI as needed
                     $('#ticket-' + ticketId + ' .status-dropdown').val(response.status);
                     showAlert('success', 'Status updated successfully.');
-
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
@@ -96,17 +110,12 @@
             });
         });
 
-
-
         function showAlert(type, message) {
-            // Create alert element
             var alert = $('<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
                             '<strong>' + message + '</strong>' +
                             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
                         '</div>');
 
-            // Append to body and fade out after 3 seconds
-            //$('body').append(alert);
             $('.table').before(alert);
 
             setTimeout(function () {
@@ -115,5 +124,4 @@
         }
     });
 </script>
-
 @endsection
