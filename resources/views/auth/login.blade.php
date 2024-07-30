@@ -90,6 +90,14 @@
                             </div>
 
                         </div>
+             
+            <!-- <div class="row mb-0">
+            <div class="col-md-6 offset-md-4 mt-2">
+                        <a href="{{ route('facebook.login') }}" class="btn btn-facebook btn-user btn-block">
+            <i class="fab fa-facebook-f fa-fw"></i>
+            Login with Facebook
+            </a>
+            </div></div> -->
                         
             
 

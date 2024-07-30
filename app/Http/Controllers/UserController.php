@@ -46,7 +46,7 @@ class UserController extends Controller
        // $inputs['pwd'] = Str::random(6);
         $inputs['password']= Hash::make(Str::random(6));
         User::create($inputs);
-        return redirect()->route('users.list')->with('success','User created successfully.');
+        return redirect()->route('users.index')->with('success','User created successfully.');
 
         
     }
@@ -94,7 +94,7 @@ class UserController extends Controller
         //
         // print_r('fdjfh'); exit;
         User::find($id)->delete();
-        return redirect()->route('users')->with('success','Deleted successfully.');
+        return redirect()->route('users.index')->with('success','Deleted successfully.');
     }
     public function delete(string $id)
     {

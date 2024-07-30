@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use App\Models\Post;  // Import the Post model
 use App\Models\User;  // Import the Post model
 use App\Models\Ticket;  // Import the Post model
+use App\Models\Product;  // Import the Post model
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,5 +23,9 @@ class DatabaseSeeder extends Seeder
         Ticket::factory()->count(20)->create();
 
         Post::factory(50)->create(); // Use the Post model factory
+
+        Product::factory()->count(10)->create();
+        Category::factory()->count(10)->create();
+
     }
 }
