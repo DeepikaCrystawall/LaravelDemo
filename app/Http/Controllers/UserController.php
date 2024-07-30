@@ -13,6 +13,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct(){
+        view()->share('usr_menuactive','active');
+    }
     public function index()
     {
         //

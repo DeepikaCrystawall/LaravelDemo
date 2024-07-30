@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Cache;
 class PostController extends Controller
 {
     protected $path = 'assets/post/';
+
+    public function __construct(){
+        view()->share('post_menuactive','active');
+    }
     
     public function index()
     {

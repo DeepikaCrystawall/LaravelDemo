@@ -42,24 +42,25 @@
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
-      <div class="logo">
+      <div class="logo mb-2">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-          TS
+          AT
         </a>
         <a href="http://127.0.0.1:8000" class="simple-text logo-normal">
-         Ticket System
+         ALPHA TEAM
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
       
+                        <li class="nav-item {{@$dash_menuactive}}"><a href="{{route('dashboard.index')}}" class="nav-link"><i class="now-ui-icons design_app"> </i>Dashboard </a></li>
                         @if (\Auth::user()->role_id != 2)
-                        <li class="nav-item"><a href="{{ route('users.index')}}" class="nav-link">User</a></li>
+                        <li class="nav-item {{@$usr_menuactive}}"><a href="{{ route('users.index')}}" class="nav-link"><i class="now-ui-icons users_single-02"> </i>User</a></li>
                         @endif
-                        <li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link">All Tickets</a></li> 
-                        <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link">All Product Category</a></li> 
-                        <li class="nav-item"><a href="{{route('products.index')}}" class="nav-link">All Products</a></li>                         
-                        <li class="nav-item"><a href="{{route('posts.index')}}" class="nav-link">Post Management</a></li>                         
+                        <li class="nav-item {{@$tic_menuactive}}"><a href="{{route('ticket.index')}}" class="nav-link"><i class="now-ui-icons files_box"> </i>Tickets</a></li> 
+                        <li class="nav-item {{@$cat_menuactive}}"><a href="{{route('category.index')}}" class="nav-link"><i class="now-ui-icons education_atom"> </i>Product Category</a></li> 
+                        <li class="nav-item {{@$pro_menuactive}}"><a href="{{route('products.index')}}" class="nav-link"><i class="now-ui-icons objects_globe"> </i>Products</a></li>                         
+                        <li class="nav-item {{@$post_menuactive}}"><a href="{{route('posts.index')}}" class="nav-link"><i class="now-ui-icons design_bullet-list-67"> </i>Post Management</a></li>                         
         </ul>
       </div>
     </div>
@@ -107,20 +108,15 @@
                 </div>
               </li> -->
               <li class="nav-item">   
-                <a>          
-                  <p>
-                    <span class="d-lg-none d-md-block">
-                    <a class="dropdown-item" style="color:orange" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                <a><p><span class="d-lg-none d-md-block">
+                    <a class="dropdown-item" style="color:orange" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">{{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                    </form>
                     </span>
-</p>       </a>        
+                  </p></a>        
               </li>
               <li class="nav-item">   
     <a>          

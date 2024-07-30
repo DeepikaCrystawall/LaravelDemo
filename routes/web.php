@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
  
     Route::middleware(['admin'])->group(function () {
 
+        Route::resource('/dashboard', DashboardController::class);
         Route::resource('/ticket', TicketController::class);
         Route::post('/ticket/{id}/toggle-status', [TicketController::class, 'toggleStatus'])->name('ticket.toggleStatus');
         Route::get('/reply/{ticketid}', [TicketController::class, 'replyticket'])->name('reply');
@@ -104,7 +105,7 @@ Route::middleware(['auth'])->group(function () {
     // Ensure /ticket and /ticket/create are accessible to both roles
     Route::resource('/ticket', TicketController::class);
     //  Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog_list');
-    Route::resource('/dashboard', DashboardController::class);
+    
  
 
     

@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct(){
+        view()->share('cat_menuactive','active');
+    }
     /**
      * Display a listing of the resource.
      */

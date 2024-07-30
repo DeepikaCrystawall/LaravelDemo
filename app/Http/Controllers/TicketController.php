@@ -17,6 +17,9 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct(){
+        view()->share('tic_menuactive','active');
+    }
     public function ticketlisting()
     {
         $user = auth()->user();
