@@ -22,6 +22,14 @@
             </form>
 
             <div class="row">
+            <h2>Ticket</h2>
+            <div class="container">
+                <span>Title ::</span>
+                <span>{{$ticketdetails->title}}</span><br>
+                <span>Description ::</span>
+                <span>{{$ticketdetails->description}}</span><br>
+            </div>
+
                 <h2>Earlier Replies</h2>
                 <div class="container">
                 <ul>
