@@ -148,7 +148,7 @@
                         @include('partials.query_form', ['product' => $product])
                     </div>
                     @else
-                    <a href="{{ route('login') }}" class="btn btn-primary">Any Queries?</a>
+                    <a href="{{ route('user-login') }}" class="btn btn-primary">Any Queries?</a>
                     @endif
                 </div>
             </div>

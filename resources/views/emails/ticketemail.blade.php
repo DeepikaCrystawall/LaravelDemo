@@ -6,11 +6,12 @@
     <title>New Ticket Created</title>
 </head>
 <body>
-   <p>Hey!... A New Ticket Created ..Please Check Details...</p>
-     <p>Name::{{ $mailData['title'] }}</p>
-    <p>Description::{{ $mailData['description'] }}</p>
   
-    <p>Created At::{{$mailData['created_at']}}</p>
+   <p>Hey!... A New Ticket Created ..Please Check Details...</p>
+     <p>Name::{{ $ticket->title }}</p>
+    <p>Description::{{ $ticket->description }}</p>
+    <p>Created By::{{ $ticket->user->name }}</p>
+    <p>Created At::{{$ticket->created_at}}</p>
      
     <p>Thank you</p>
 
