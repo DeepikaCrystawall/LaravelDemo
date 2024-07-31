@@ -12,6 +12,7 @@ use App\Listeners\SendEmailNotification;
 
 class AppServiceProvider extends ServiceProvider
 {
+    
     /**
      * Register any application services.
      */
@@ -30,7 +31,9 @@ class AppServiceProvider extends ServiceProvider
          // Register event and listener
          Event::listen(
             UserRegistered::class,
-            [SendWelcomeEmail::class, 'handle'],
+            [SendWelcomeEmail::class, 'handle']           
+        );
+        Event::listen(
             TicketCreation::class,
             [SendEmailNotification::class, 'handle']
         );
