@@ -40,7 +40,7 @@
                                 <td>{{$test['name']}}</td>
                                 <td>{{$test['status']}}</td>
                               
-                                <td>{{$test['time']}}</td> 
+                                <!-- <td>{{$test['time']}}</td>  -->
                             </tr>
                         @endforeach
                     </tbody>
