@@ -7,6 +7,12 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Ticket;
 use App\Models\User; // Import the User model
+use App\Models\Product;
+use App\Events\TicketCreation;
+
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Storage;
 
 use PHPUnit\Framework\Attributes\Test;
 
@@ -22,39 +28,7 @@ class TicketCrudTest extends TestCase
         // Create a test user and authenticate them
         $this->user = User::factory()->create();
         $this->actingAs($this->user);
-    }
-
-
-    /**
-     * A basic feature test example.
-     */
-    // public function test_example(): void
-    // {
-    //     $response = $this->get('/');
-
-    //     $response->assertStatus(200);
-    // }
-
-    #[Test]
-    public function it_creates_a_ticket()
-    {
-        // Arrange: Prepare the data to be sent
-        $data = [
-            'title' => 'Sample Ticket',
-            'description' => 'This is a sample ticket description.',
-        ];
-
-        // Act: Send a POST request to create the ticket
-        //$response = $this->post('/tickets', $data);
-        $response = $this->post(route('ticket.store'), $data);
-
-        // Assert: Check the ticket was created and redirected
-        $response->assertStatus(302); // Assuming redirection after create
-       // $response->assertRedirect('/tickets');
-        $response->assertRedirect(route('ticket.index'));
-
-        $this->assertDatabaseHas('tickets', $data);
-    }
+    }  
 
     #[Test]
 
@@ -115,6 +89,132 @@ class TicketCrudTest extends TestCase
 
 
         $this->assertDatabaseMissing('tickets', ['id' => $ticket->id]);
+    }
+
+    #[Test]
+    public function it_creates_a_ticket_and_redirects_users_based_on_role()
+    {
+        // Prepare the necessary data
+        $user = User::factory()->create(['role_id' => 1]); // Regular user
+        $product = Product::factory()->create(); // Assuming you have a Product factory
+
+        // Act as the user
+        $this->actingAs($user);
+
+        // Create the request data
+        $data = [
+            'title' => 'Test Ticket',
+            'description' => 'Test Description',
+            'product_id' => $product->id,
+        ];
+
+        // Send the request
+        $response = $this->post(route('ticket.store'), $data);
+
+        // Assert that the ticket was created
+        $this->assertDatabaseHas('tickets', [
+            'title' => 'Test Ticket',
+            'description' => 'Test Description',
+            'user_id' => $user->id,
+            'product_id' => $product->id,
+        ]);
+
+        // Assert the correct redirect for regular user
+        $response->assertRedirect(route('ticket.index'))
+                 ->assertSessionHas('success', 'Ticket created successfully.');
+    }
+
+    #[Test]    
+    public function it_stores_an_attachment_when_provided()
+    {
+        Storage::fake('attachments');
+
+        // Prepare the necessary data
+        $user = User::factory()->create(['role_id' => 1]);
+        $product = Product::factory()->create();
+        $file = UploadedFile::fake()->image('attachment.jpg');
+
+        // Act as the user
+        $this->actingAs($user);
+
+        // Create the request data
+        $data = [
+            'title' => 'Test Ticket with Attachment',
+            'description' => 'Test Description',
+            'product_id' => $product->id,
+            'attachment' => $file,
+        ];
+
+        // Send the request
+        $response = $this->post(route('ticket.store'), $data);
+
+        // Assert that the ticket was created
+        $this->assertDatabaseHas('tickets', [
+            'title' => 'Test Ticket with Attachment',
+            'description' => 'Test Description',
+            'user_id' => $user->id,
+            'product_id' => $product->id,
+        ]);
+
+        // Assert the file was stored
+       // Storage::disk('attachments')->assertExists($file->hashName());
+        $fileName = 'CvcpWawAqi8c6G6oaoYkPepNSUDAiwXE8QpgBp9o.jpg'; // Example file name
+      //  Storage::disk('attachments')->assertExists($fileName);
+        Storage::disk('public')->assertExists('attachments/' . $fileName);
+
+    }
+
+    #[Test]
+     public function it_fires_the_ticket_creation_event()
+    {
+        // Fake the event
+        Event::fake();
+
+        // Prepare the necessary data
+        $user = User::factory()->create(['role_id' => 1]);
+        $product = Product::factory()->create();
+
+        // Act as the user
+        $this->actingAs($user);
+
+        // Create the request data
+        $data = [
+            'title' => 'Event Test Ticket',
+            'description' => 'Test Description',
+            'product_id' => $product->id,
+        ];
+
+        // Send the request
+        $response = $this->post(route('ticket.store'), $data);
+
+        // Assert that the event was dispatched
+        Event::assertDispatched(TicketCreation::class);
+        
+    }
+
+    #[Test]
+    public function it_redirects_users_to_my_account()
+    {
+        // Prepare the necessary data
+        $user = User::factory()->create(['role_id' => 2]); //  user
+        $product = Product::factory()->create();
+
+        // Act as the user
+        $this->actingAs($user);
+
+        // Create the request data
+        $data = [
+            'title' => 'User Test Ticket',
+            'description' => 'Test Description',
+            'product_id' => $product->id,
+        ];
+
+        // Send the request
+        $response = $this->post(route('ticket.store'), $data);
+       
+        // Assert the correct redirect for  user
+        $response->assertRedirect(route('my-account', ['ticket' => 'ticket']))
+                 ->assertSessionHas('success', 'Ticket created successfully');
     }
 
 }

@@ -60,7 +60,7 @@ class TicketController extends Controller
             $this->storeAttachment($request, $ticket);
         }
         event(new TicketCreation($ticket));
-        if(Auth::user()->role_id != 2)
+        if(Auth::user()->role_id == 1)
             return redirect()->route('ticket.index')->with('success', 'Ticket created successfully.');
         else
             return redirect()->route('my-account',['ticket'=>'ticket'])->with('success','Ticket created successfully');
