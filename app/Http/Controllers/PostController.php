@@ -18,7 +18,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Cache::remember('posts', 60, function () {
-            return Post::with(['user'])->paginate(10);
+            return Post::with(['user'])->latest()->paginate(10);
         });
 
         return view('dashboard.posts.index', compact('posts'));
@@ -57,7 +57,7 @@ class PostController extends Controller
     public function update(PostRequest $request, $id)
     {
         $post = Post::findOrFail($id);
-
+        // print_r($post); exit;
         $image = $this->uploadImage($request);
         if ($image) {
             $post->image = $image;
@@ -66,7 +66,7 @@ class PostController extends Controller
         $post->update(array_merge($request->validated(), [
             'slug' => Str::slug($request->input('title')),
         ]));
-
+// print_r
         return redirect()->route('posts.index')->with('message', 'Post successfully updated.');
     }
 

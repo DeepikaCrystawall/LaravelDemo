@@ -44,13 +44,14 @@
             <div class="container topbar bg-primary d-none d-lg-block">
                 <div class="d-flex justify-content-between">
                     <div class="top-info ps-2">
-                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
-                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
+                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">Crystawall Technologies</a></small>
+                        <small class="me-3"><i class="fas fa-phone me-2 text-secondary"></i><a href="#" class="text-white">(+971) 123456789</a></small>
                     </div>
                     <div class="top-link pe-2">
-                        <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
+                    <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
+                        <!-- <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
                         <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                        <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a> -->
                     </div>
                 </div>
             </div>
@@ -141,8 +142,8 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="position-relative mx-auto">
-                                <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Your Email">
-                                <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Subscribe Now</button>
+                                <!-- <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Your Email">
+                                <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Subscribe Now</button> -->
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -161,7 +162,7 @@
                             <h4 class="text-light mb-3">Why People Like us!</h4>
                             <p class="mb-4">typesetting, remaining essentially unchanged. It was 
                                 popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
-                            <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
+                            <!-- <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a> -->
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
@@ -187,11 +188,11 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-item">
                             <h4 class="text-light mb-3">Contact</h4>
-                            <p>Address: 1429 Netus Rd, NY 48247</p>
+                            <p>Address: Crystawall Technologies</p>
                             <p>Email: Example@gmail.com</p>
-                            <p>Phone: +0123 4567 8910</p>
-                            <p>Payment Accepted</p>
-                            <img src="{{ asset('assets/web/img/payment.png')}}" class="img-fluid" alt="">
+                            <p>Phone: (+971) 123456789</p>
+                            <!-- <p>Payment Accepted</p>
+                            <img src="{{ asset('assets/web/img/payment.png')}}" class="img-fluid" alt=""> -->
                         </div>
                     </div>
                 </div>
@@ -210,7 +211,7 @@
                         <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                         <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                         <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom" href="#">HTML Codex</a> Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
+                        Designed By <a class="border-bottom" href="#">Alpha Team</a> 
                     </div>
                 </div>
             </div>

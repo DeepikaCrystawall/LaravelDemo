@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="carousel-item rounded">
                                     <img src="{{ asset('assets/web/img/hero-img-2.jpg') }} " class="img-fluid w-100 h-100 rounded" alt="Second slide">
-                                    <a href="#" class="btn px-4 py-2 text-white rounded">Vesitables</a>
+                                    <a href="#" class="btn px-4 py-2 text-white rounded">Vegitables</a>
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
@@ -42,6 +42,7 @@
 
 
         <!-- Featurs Section Start -->
+        <?php /*?>
         <div class="container-fluid featurs py-5">
             <div class="container py-5">
                 <div class="row g-4">
@@ -92,6 +93,7 @@
                 </div>
             </div>
         </div>
+        <?php */?>
         <!-- Featurs Section End -->
 
 
@@ -160,7 +162,7 @@
             <div class="container py-5">
                 <div class="row g-4 justify-content-center">
                     <div class="col-md-6 col-lg-4">
-                        <a href="#">
+                        
                             <div class="service-item bg-secondary rounded border border-secondary">
                                 <img src="{{ asset('assets/web/img/featur-1.jpg') }} " class="img-fluid rounded-top w-100" alt="">
                                 <div class="px-4 rounded-bottom">
@@ -170,7 +172,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        
                     </div>
                     <div class="col-md-6 col-lg-4">
                         <a href="#">
@@ -240,7 +242,7 @@
                             <h1 class="display-3 text-white">Fresh Exotic Fruits</h1>
                             <p class="fw-normal display-3 text-dark mb-4">in Our Store</p>
                             <p class="mb-4 text-dark">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
-                            <a href="#" class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5">BUY</a>
+                            <!-- <a href="#" class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5">BUY</a> -->
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -288,6 +290,7 @@
 
 
         <!-- Fact Start -->
+         <?php /* ?>
         <div class="container-fluid py-5">
             <div class="container">
                 <div class="bg-light p-5 rounded">
@@ -324,11 +327,12 @@
                 </div>
             </div>
         </div>
+        <?php */?>
         <!-- Fact Start -->
 
 
         <!-- Tastimonial Start -->
-        <div class="container-fluid posts py-5">
+        <div class="container-fluid posts py-5 bg-clor-gray">
     <div class="container py-5">
         <div class="posts-header text-center">
             <h4 class="text-primary">Articles</h4>

@@ -57,7 +57,7 @@
                         @if (\Auth::user()->role_id != 2)
                         <li class="nav-item {{@$usr_menuactive}}"><a href="{{ route('users.index')}}" class="nav-link"><i class="now-ui-icons users_single-02"> </i>User</a></li>
                         @endif
-                        <li class="nav-item {{@$tic_menuactive}}"><a href="{{route('ticket.index')}}" class="nav-link"><i class="now-ui-icons files_box"> </i>Tickets</a></li> 
+                        <li class="nav-item {{@$tic_menuactive}}"><a href="{{route('ticket.index')}}" class="nav-link"><i class="now-ui-icons files_box"> </i>User Enquiries</a></li> 
                         <li class="nav-item {{@$cat_menuactive}}"><a href="{{route('category.index')}}" class="nav-link"><i class="now-ui-icons education_atom"> </i>Product Category</a></li> 
                         <li class="nav-item {{@$pro_menuactive}}"><a href="{{route('products.index')}}" class="nav-link"><i class="now-ui-icons objects_globe"> </i>Products</a></li>                         
                         <li class="nav-item {{@$post_menuactive}}"><a href="{{route('posts.index')}}" class="nav-link"><i class="now-ui-icons design_bullet-list-67"> </i>Post Management</a></li>                         

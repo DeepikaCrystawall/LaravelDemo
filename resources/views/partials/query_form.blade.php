@@ -1,6 +1,6 @@
 <div class="card shadow-sm border-light">
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">{{ __('Create New Query Ticket') }}</h5>
+        <h5 class="mb-0">{{ __('Enquiry') }}</h5>
     </div>
 
     <div class="card-body">
@@ -20,7 +20,7 @@
                 <label for="attachment">Attachment</label>
                 <input type="file" name="attachment" class="form-control" id="attachment">
             </div>
-            <button type="submit" class="btn btn-primary">Create Ticket</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>

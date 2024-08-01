@@ -21,7 +21,7 @@ class ProductController extends Controller
     {
         //
         $title    = "Products";
-        $products     = Product::with('category')->paginate(10);
+        $products     = Product::with('category')->latest()->paginate(10);
         
         return view('products.list',compact('title','products'));
     }

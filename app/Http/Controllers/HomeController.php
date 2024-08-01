@@ -40,8 +40,8 @@ class HomeController extends Controller
         $data['home_products']      = Product::with('category')->get();
         $data['home_category']      = Category::get();
         $data['home_blogs']         = Post::orderBy('id', 'desc')->limit(6)->get();
-        $data['organic_vegetables'] = Product::with('category')->where('category_id','5')->get();
-        $data['organic_fruits']     = Product::with('category')->where('category_id','4')->get();
+        $data['organic_vegetables'] = Product::with('category')->where('category_id','2')->get();
+        $data['organic_fruits']     = Product::with('category')->where('category_id','1')->get();
         
         return view('frontend/index',$data);
     }
@@ -84,6 +84,10 @@ class HomeController extends Controller
 
     public function user_login(){
         return view('frontend/login');
+    }
+    public function user_register()
+    {
+        return view('frontend/register');
     }
     public function profile_update(Request $request)
     {
