@@ -24,7 +24,7 @@
             <span>Profile</span>
         </label>
         <label for="blog" class="tickets">
-            <span>Tickets</span>
+            <span>Enquiries</span>
         </label>
         
         <div class="slider"></div>
@@ -36,6 +36,15 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endsession
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <div class="home text">
             <div class="title">Profile</div>
             <form action="profile-update" method="post">
@@ -66,10 +75,10 @@
             </form>
         </div>
         <div class="blog text">
-            <div class="title">Tickets</div>
+            <div class="title">Enquiries</div>
             <!-- <button class="btn btn-success mt-2 mb-2">Create New Ticket +</button> -->
                 @if ($tickets->isEmpty())
-                <p>No tickets found.</p>
+                <p>No data found.</p>
                 @else
                 <table class="table">
                     <thead>
@@ -78,7 +87,7 @@
                             <th scope="col">Title</th>
                             <th scope="col">Product</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Status</th>
+                            <!-- <th scope="col">Status</th> -->
                             <th scope="col">Created On</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -90,10 +99,10 @@
                               <td>{{ $tckt->title}}</td>
                               <td>{{ $tckt->product->title}}</td>
                               <td>{{ $tckt->description}}</td>
-                              <td>{{ $tckt->status}}</td>
+                              <!-- <td>{{ $tckt->status}}</td> -->
                               <td>{{ $tckt->created_at}}</td>
                               <td>
-                                <button type="button" class="btn btn-primary ticket-reply" id="{{ $tckt->id}}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">View</button></td>
+                                <button type="button" class="btn btn-primary ticket-reply" id="{{ $tckt->id}}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">View Reply</button></td>
                            </tr>
                         @endforeach
                     </tbody>

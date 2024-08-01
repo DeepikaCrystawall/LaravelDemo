@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <div class="card shadow-sm border-light mb-4">
         <div class="card-body">
-            <h3 class="mb-4">Ticket Details</h3>
+            <h3 class="mb-4">Enquiry Details</h3>
             <ul class="list-unstyled">
                 <li><strong>Title:</strong> {{ $ticketdetails->title }}</li>
                 <li><strong>Description:</strong> {{ $ticketdetails->description }}</li>

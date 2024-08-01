@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         //
         $title    = "Users";
-        $users     = User::where('role_id',2)->get();
+        $users     = User::where('role_id',2)->latest()->paginate(10);
         return view('users.list',compact('title','users'));
     }
 
