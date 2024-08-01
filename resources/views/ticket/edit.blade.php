@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
-                    <h5 class="mb-0">{{ __('Update Support Ticket') }}</h5>
+                    <h5 class="mb-0">{{ __('Enquiry Details') }}</h5>
                 </div>
 
                 <div class="card-body">

@@ -54,7 +54,7 @@ Route::get('/blogs', [BlogController::class, 'index'])->name('blog_list');
 Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('show_blog');
 Route::get('/productlist', [HomeController::class, 'products'])->name('productlist');
 Route::get('product-details/{id}', [HomeController::class, 'products_details']);
-Route::get('category/{id}', [HomeController::class, 'products_with_category']);
+Route::get('category-products/{id}', [HomeController::class, 'products_with_category']);
 Route::get('/user-login', [HomeController::class, 'user_login'])->name('user-login');
 Route::get('/user-register', [HomeController::class, 'user_register'])->name('user-register');
 

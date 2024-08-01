@@ -625,4 +625,6 @@
   .content .list label:hover{
     color: var(--bs-primary);
   }
-
+  .bg-clor-gray {
+    background: #ffb524;
+}

@@ -38,6 +38,7 @@ class TestResultController extends Controller
     {
         // Check if there are test cases in the current test suite
         if (isset($testSuite->testcase)) {
+            
             foreach ($testSuite->testcase as $testcase) {
                 $testCases[] = [
                     'name' => (string) $testcase['name'],

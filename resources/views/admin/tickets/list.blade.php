@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 <div class="container">
-    <h1>Tickets</h1>
+    <h1>Enquiries</h1>
     <a href="{{ route('ticket.create')}}" class="btn btn-primary mb-4">Create +</a>  
     <div class="card">
         <div class="card-body">
@@ -33,23 +33,23 @@
                             @foreach ($tickets as $ticket)
                                 <tr>
                                     <td>
-                                        <a href="{{ route('ticket.show', $ticket->id) }}" class="text-decoration-none text-dark"><b>{{ $ticket->title }}</b></a>
+                                        <a href="{{ route('ticket.show', $ticket->id) }}" class="text-decoration-none text-dark">{{ $ticket->title }}</a>
                                     </td>
-                                    <td>{{ $ticket->description }}</td>
+                                    <td>{!! Illuminate\Support\Str::limit($ticket->description, 50) !!}</td>
                                     <td>{{ $ticket->status }}</td>
                                     <td>{{ $ticket->user->name }}</td>                                  
                                     <td>
-                                        <div class="d-flex align-items-center">
-                                            <a href="{{ route('reply', ['ticketid' => $ticket->id]) }}" class="btn btn-warning me-2">
-                                                {{ \Auth::user()->role_id != 2 ? 'Reply' : 'View' }}
+                                        <div class="d-flex align-items-center ">
+                                            <a href="{{ route('reply', ['ticketid' => $ticket->id]) }}" class="btn btn-success me-2 mr-2">
+                                            <i class="fas fa-eye"></i>
                                             </a>
                                             @if(Auth::user()->role_id != 2)
-                                            <a href="{{ route('ticket.show', $ticket->id) }}" class="btn btn-info me-2">
-                                                <i class="fas fa-eye"></i> <!-- View Icon -->
-                                            </a>
-                                            <a href="{{ route('ticket.edit', $ticket->id) }}" class="btn btn-primary me-2">
+                                            <!-- <a href="{{ route('ticket.show', $ticket->id) }}" class="btn btn-info me-2">
+                                                <i class="fas fa-eye"></i> 
+                                            </a> -->
+                                            <a href="{{ route('ticket.edit', $ticket->id) }}" class="btn btn-info me-2 mr-2">
                                                 <i class="fas fa-edit"></i> <!-- Edit Icon -->
-                                            </a>
+                                            </a> 
                                             @endif
                                             <form action="{{ route('ticket.destroy', $ticket->id) }}" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this ticket?');">
                                                 @method('delete')

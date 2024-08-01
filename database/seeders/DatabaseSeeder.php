@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
 
         Post::factory(5)->create(); // Use the Post model factory
 
-        Product::factory()->count(10)->create();
+        Product::factory()->count(5)->create();
         Category::factory()->count(2)->create();
 
     }

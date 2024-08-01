@@ -162,7 +162,7 @@
                                 @foreach($category as $catgry)
                                 <li>
                                     <div class="d-flex justify-content-between fruite-name">
-                                        <a href="{{ url('category/' . $catgry->id) }}"><i class="fas fa-apple-alt me-2"></i>{{ $catgry->title }}</a>
+                                        <a href="{{ url('category-products/' . $catgry->id) }}"><i class="fas fa-apple-alt me-2"></i>{{ $catgry->title }}</a>
                                         <span>({{ $catgry->product->count() }})</span>
                                     </div>
                                 </li>
