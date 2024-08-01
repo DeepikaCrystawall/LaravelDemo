@@ -4,6 +4,7 @@
          bootstrap="vendor/autoload.php"
          colors="true"
 >
+   
     <testsuites>
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
@@ -14,6 +15,9 @@
         </testsuite>
 
     </testsuites>
+     <logging>
+        <log type="junit" target="storage/logs/phpunit.xml"/>
+    </logging>
     <source>
         <include>
             <directory>app</directory>

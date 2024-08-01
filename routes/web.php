@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GithubController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\FaceBookController;
+use App\Http\Controllers\TestResultController;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +60,10 @@ Route::get('/productlist', [HomeController::class, 'products'])->name('productli
 Route::get('product-details/{id}', [HomeController::class, 'products_details']);
 Route::get('category/{id}', [HomeController::class, 'products_with_category']);
 Route::get('/user-login', [HomeController::class, 'user_login'])->name('user-login');
+
+Route::get('/test-results', [TestResultController::class, 'index'])->name('test.results');
+Route::get('/run-tests', [TestResultController::class, 'readPhpunitXml'])->name('run.tests');
+Route::get('/convert-xml-to-json', [TestResultController::class, 'convertXmlToJson']);
 
 
 Route::get('/contact-us', [HomeController::class, 'contactus'])->name('contact-us');
