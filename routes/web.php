@@ -17,6 +17,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EmailBatchController;
+use App\Http\Controllers\TestController;
 
 Route::get('/dispatch-emails', [EmailBatchController::class, 'dispatchBatch']);
 use App\Http\Controllers\DashboardController;
@@ -25,6 +26,10 @@ Route::get('/', function () {
 });
  
  
+
+Route::get('/test-results', [TestController::class, 'show'])->name('test.results');
+Route::get('/test-results1', [TestResultController::class, 'showResults1']);
+
 Auth::routes();
 
 // GithubController redirect and callback urls
