@@ -28,6 +28,7 @@ Route::get('/', function () {
  
 
 Route::get('/test-results', [TestController::class, 'show'])->name('test.results');
+Route::get('/test-results1', [TestResultController::class, 'showResults1']);
 
 Auth::routes();
 
