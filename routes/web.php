@@ -56,6 +56,8 @@ Route::get('/productlist', [HomeController::class, 'products'])->name('productli
 Route::get('product-details/{id}', [HomeController::class, 'products_details']);
 Route::get('category/{id}', [HomeController::class, 'products_with_category']);
 Route::get('/user-login', [HomeController::class, 'user_login'])->name('user-login');
+Route::get('/user-register', [HomeController::class, 'user_register'])->name('user-register');
+
 
 Route::get('/test-results', [TestResultController::class, 'index'])->name('test.results');
 Route::get('/run-tests', [TestResultController::class, 'readPhpunitXml'])->name('run.tests');

@@ -18,11 +18,11 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->count(10)->create();
+        User::factory()->count(3)->create();
 
         Ticket::factory()->count(20)->create();
 
-        Post::factory(50)->create(); // Use the Post model factory
+        Post::factory(5)->create(); // Use the Post model factory
 
         Product::factory()->count(10)->create();
         Category::factory()->count(2)->create();
