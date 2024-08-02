@@ -58,6 +58,16 @@ class ProductCrudTest extends TestCase
         
     }
     #[Test]
+        public function it_can_delete_product()
+        {
+            $product = Product::factory()->create(['category_id'=>1]);
+            // Send the request
+            $response = $this->delete(route('products.destroy', $product->id));
+            // Assert the correct redirect for regular user
+            $response->assertRedirect(route('products.index'))
+            ->assertSessionHas('success','Deleted successfully.');
+        }
+    #[Test]
     public function it_displays_a_product()
     {
         

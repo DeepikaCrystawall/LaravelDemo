@@ -29,7 +29,12 @@
                                     <td>{{ $catgry->title }}</td>                                  
                                     <td>
                                         <a href="{{ route('category.edit',$catgry->id)}}" class="btn btn-info"><i class="fas fa-edit"></i> Edit</a>
-                                        <a href="{{ url('category/delete',$catgry->id)}}" class="btn btn-danger delete"><i class="fas fa-trash"></i> Delete</a>
+                                        <!-- <a href="{{ url('category/delete',$catgry->id)}}" class="btn btn-danger delete"><i class="fas fa-trash"></i> Delete</a> -->
+                                        <form action="{{ route('category.destroy', $catgry) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger delete" type="submit">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

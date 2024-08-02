@@ -82,7 +82,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/ticketlisting', [TicketController::class, 'ticketlisting'])->name('ticketlist');
  
         Route::resource('/users', UserController::class);
-        Route::get('/users/delete/{id}', [UserController::class, 'delete'])->name('delete');
  
         Route::resource('/posts', 'App\Http\Controllers\PostController');
         Route::get('posts/{id}/delete','App\Http\Controllers\PostController@destroy');
@@ -90,10 +89,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/posts/{post}/publish','App\Http\Controllers\PostController@publish');
        
         Route::resource('/category', CategoryController::class);
-        Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
  
         Route::resource('/products', ProductController::class);
-        Route::get('/products/delete/{id}', [ProductController::class, 'delete']);
        
  
     });
