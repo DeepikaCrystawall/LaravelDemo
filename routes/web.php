@@ -9,7 +9,6 @@ use App\Http\Controllers\GithubController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\FaceBookController;
 use App\Http\Controllers\TestResultController;
-
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -56,7 +55,7 @@ Route::get('/admin',function(){
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Blogs Routes
 Route::get('/blogs', [BlogController::class, 'index'])->name('blog_list');
-Route::get('/blog/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('show_blog');
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('show_blog');
 Route::get('/productlist', [HomeController::class, 'products'])->name('productlist');
 Route::get('product-details/{id}', [HomeController::class, 'products_details']);
 Route::get('category-products/{id}', [HomeController::class, 'products_with_category']);
