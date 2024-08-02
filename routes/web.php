@@ -93,7 +93,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
  
         Route::resource('/products', ProductController::class);
-        Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+        Route::get('/products/delete/{id}', [ProductController::class, 'delete']);
        
  
     });
