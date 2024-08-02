@@ -11,6 +11,7 @@ class Post extends Model
     use HasFactory;  // Use the HasFactory trait
 
     protected $table = 'posts';
+    protected $fillable = ['title', 'body','meta_tag','meta_description','slug','keywords', 'user_id','image','is_published'];
     protected $guarded = [];
 
     protected static function boot()

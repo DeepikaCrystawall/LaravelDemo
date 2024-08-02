@@ -86,7 +86,7 @@
 
                     <div class="form-group">
                         <label for="images" class="font-weight-bold">Image</label>
-                        <input type="file" class="form-control-file @error('images') is-invalid @enderror" id="images" name="images" onchange="readURL(this);">
+                        <input type="file" class="form-control-file @error('images') is-invalid @enderror" id="images" name="image" onchange="readURL(this);">
                         @if(@$row->images)
                             <img id="imagePreview" src="{{ asset('uploads/posts/' . @$row->images) }}" alt="Image Preview" class="mt-2" style="max-width: 100%; height: auto;">
                         @else

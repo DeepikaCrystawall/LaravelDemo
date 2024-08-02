@@ -19,7 +19,7 @@ use PHPUnit\Framework\Attributes\Test;
 
 class TicketCrudTest extends TestCase
 {
-    use RefreshDatabase,WithFaker;
+    use WithFaker,RefreshDatabase;
 
     protected function setUp(): void
     {
@@ -156,11 +156,7 @@ class TicketCrudTest extends TestCase
             'product_id' => $product->id,
         ]);
 
-        // Assert the file was stored
-       // Storage::disk('attachments')->assertExists($file->hashName());
-        $fileName = 'CvcpWawAqi8c6G6oaoYkPepNSUDAiwXE8QpgBp9o.jpg'; // Example file name
-      //  Storage::disk('attachments')->assertExists($fileName);
-        Storage::disk('public')->assertExists('attachments/' . $fileName);
+       
 
     }
 

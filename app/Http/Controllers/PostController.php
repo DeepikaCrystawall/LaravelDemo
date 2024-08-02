@@ -17,10 +17,11 @@ class PostController extends Controller
     
     public function index()
     {
-        $posts = Cache::remember('posts', 60, function () {
-            return Post::with(['user'])->latest()->paginate(10);
-        });
+        // $posts = Cache::remember('posts', 60, function () {
+        //     return Post::with(['user'])->latest()->paginate(10);
+        // });
 
+       $posts = Post::with(['user'])->latest()->paginate(10);
         return view('dashboard.posts.index', compact('posts'));
     }
 
@@ -31,12 +32,24 @@ class PostController extends Controller
 
     public function store(PostRequest $request)
     {
-        $image = $this->uploadImage($request);
-
+        $image = $this->uploadImage1($request);
+       // dd($image);
         $post = Post::create(array_merge($request->validated(), [
             'slug' => Str::slug($request->input('title')),
             'image' => $image,
         ]));
+        // $post = Post::create([
+        //     'title' => $request->input('title'),
+        //     'slug'=>Str::slug($request->input('title')),
+        //     'body' => $request->input('body'),
+        //     'meta_tag' => $request->input('meta_tag'),
+        //     'meta_description' =>  $request->input('meta_description'),
+        //     'keywords' => $request->input('keywords'),
+        //     'tags' => $request->input('tags'),
+        //     'image' => $image,
+
+
+        // ]);
 
         return $post
             ? redirect()->route('posts.index')->with('message', 'Post successfully added.')
@@ -58,7 +71,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         // print_r($post); exit;
-        $image = $this->uploadImage($request);
+        $image = $this->uploadImage1($request);
         if ($image) {
             $post->image = $image;
         }
@@ -70,9 +83,9 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('message', 'Post successfully updated.');
     }
 
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
+        //$post = Post::find($id);
         $delete = $post->delete();
 
         return $delete
@@ -92,6 +105,18 @@ class PostController extends Controller
     {
         if ($request->hasFile('images')) {
             $imageFile = $request->file('images');
+            $imageName = time() . '.' . $imageFile->getClientOriginalExtension();
+            $imageFile->move($this->path, strtolower($imageName));
+
+            return $imageName;
+        }
+        
+        return null;
+    }
+    private function uploadImage1(PostRequest $request)
+    {
+        if ($request->hasFile('image')) {
+            $imageFile = $request->file('image');
             $imageName = time() . '.' . $imageFile->getClientOriginalExtension();
             $imageFile->move($this->path, strtolower($imageName));
 

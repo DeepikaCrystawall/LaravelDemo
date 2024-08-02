@@ -63,7 +63,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="images" class="text-uppercase font-weight-bold">Image</label>
-                                        <input type="file" class="form-control-file @error('images') is-invalid @enderror" name="images" onchange="readURL(this);">
+                                        <input type="file" class="form-control-file @error('images') is-invalid @enderror" name="image" onchange="readURL(this);">
                                         <img id="imagePreview" src="#" alt="Image Preview" class="mt-2" style="display: none; max-width: 100%; height: auto;">
                                         @error('images')
                                             <div class="text-danger">{{ $message }}</div>

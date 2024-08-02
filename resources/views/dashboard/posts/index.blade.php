@@ -46,9 +46,16 @@
                                         <a href="{{ url('/posts/'.$post->id.'/edit') }}" class="btn btn-info btn-sm">
                                             <i class="fa fa-edit"></i> 
                                         </a>
-                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{ $post->id }}">
+                                        <form action="{{ route('posts.destroy', $post->id) }}" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this ticket?');">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> <!-- Delete Icon -->
+                                                </button>
+                                            </form>
+                                        <!-- <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{ $post->id }}">
                                             <i class="fa fa-trash"></i> 
-                                        </button>
+                                        </button> -->
                                     </td>
                                 </tr>
                             @endforeach
@@ -68,8 +75,8 @@
     <div class="modal-dialog">
         <form method="POST" action="" id="deleteForm">
             @csrf
-            @method('DELETE')
-            <div class="modal-content">
+            @method('delete')           
+              <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -87,16 +94,19 @@
         </form>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-    $('#deleteModal').on('show.bs.modal', function (event) {
+<!-- <script>
+    $('#deleteModal').on('show.bs.modal', function (event) { alert('ok');
         var button = $(event.relatedTarget);
         var postId = button.data('id');
-        var action = '/posts/' + postId + '/delete';
+        alert(postId);
+        var action = "{{ route('posts.destroy', ':id') }}".replace(':id', postId);
+
         var form = $('#deleteForm');
         form.attr('action', action);
     });
-</script>
+</script> -->
 
 <style>
     .action-buttons {

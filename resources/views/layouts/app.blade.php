@@ -73,7 +73,7 @@
                             @endif
 
                             <!-- Add this to your view (e.g., in a Blade file) -->
-                            <li class="nav-item"> <a href="{{ route('test.results') }}">Run Tests and Show Results</a></li>
+                            <li class="nav-item"> <a href="{{ route('test.results1') }}"> Show Test Results</a></li>
 
                         @else
                             <li class="nav-item dropdown">

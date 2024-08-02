@@ -32,8 +32,7 @@ class BlogCrudTest extends TestCase
        
         $response = $this->get('/blogs');
         $response->assertStatus(200);
-      //$response->assertViewHas('users', $users);   
-      $response->assertViewIs('frontend.blog')  
+        $response->assertViewIs('frontend.blog')  
       ->assertViewHas('title', 'Blog | Luis N Vaya | Top Modular Kitchen Service Providers') 
       ->assertViewHas('posts', function ($viewPosts) use ($blogs) {
         
@@ -53,7 +52,6 @@ class BlogCrudTest extends TestCase
     public function it_can_display_a_blog()
     {
        $blog = Post::factory()->create(['is_published'=> true]);
-       //$response = $this->get('/blogs/'.$blog->id);
        $response = $this->get(route('show_blog', $blog->id));
 
        $response->assertStatus(200);

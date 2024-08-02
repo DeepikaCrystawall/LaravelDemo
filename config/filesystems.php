@@ -61,6 +61,11 @@ return [
             'root' => storage_path('app/attachments'),
         ],
 
+        'products'=>[
+            'driver' => 'local',
+            'root'=>storage_path('app/public/uploads/products')
+        ]
+
     ],
 
     /*
