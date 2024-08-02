@@ -29,7 +29,13 @@
                   <td>{{ $user->phone}}</td>
                   <td>
                       <a href="{{ route('users.edit',$user->id)}}" class="btn btn-info"><i class="fas fa-info-circle"></i> Edit</a>
-                      <a href="{{ url('users/delete',$user->id)}}" class="btn btn-danger delete"> Delete</a></td>
+                      <!-- <a href="{{ route('users.destroy',$user->id)}}" class="btn btn-danger delete"> Delete</a></td> -->
+                      <form action="{{ route('users.destroy', $user) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger delete" type="submit">Delete</button>
+                </form>
+                      <!-- <a href="{{ url('users/delete',$user->id)}}" class="btn btn-danger delete"> Delete</a></td> -->
                 </tr>
                   @endforeach
               </tbody>
